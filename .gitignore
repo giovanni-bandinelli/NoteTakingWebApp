@@ -1,0 +1,13 @@
+client/node_modules
+client/dist
+client/.env
+client/package-lock.json
+
+server/node_modules
+server/.env
+server/package-lock.json
+
+# Misc
+*.log
+.DS_Store
+.vscode

@@ -1,0 +1,47 @@
+
+/*Design tokens are taken from global.css(might rename it designTokens.css, this (App.css) manages user's settings css */
+
+
+/* === Theme Variables === */
+
+[data-theme="light"] {
+    --background-color: var(--Neutral-0);/*idk how to manage this, should this be considered the bg color of the form card component or whole page*/
+    --background-color-secondary: var(--Neutral-100);
+    --text-color-main: var(--Neutral-950);/*used by headings, for links, labels etc*/
+    --text-color-secondary: var(--Neutral-600);/*used by paragraph only, at least in AuthPage*/
+}
+
+[data-theme="dark"] {
+    --background-color: var(--Neutral-950);
+    --background-color-secondary: var(--Neutral-700);
+    --text-color-main: var(--Neutral-0);
+}
+
+
+/* === Font Variables === */
+[data-font="sans-serif"]{
+    --font-family-base: var(--font-Inter); /*--font-Inter: 'Inter', sans-serif;*/
+}
+
+[data-font="monospace"]{
+    --font-family-base: var(--font-SourceCodePro); /*--font-SourceCodePro: 'SourceCodePro', monospace;*/
+}
+
+[data-font="serif"]{
+    --font-family-base: var( --font-NotoSerif); /*--font-Inter: 'Inter', --font-NotoSerif: 'NotoSerif', serif;*/
+}
+/* Applying font & theme settings variables */
+body {
+    font-family: var(--font-family-base);
+    background-color: var(--background-color);
+    color: var(--text-color-main);
+}
+
+p{
+    color: var(--text-color-secondary);/*in AuthPage/ResetPassword this is the only element using this color*/
+}
+
+/* Optional: Add some smooth transitions */
+body {
+    transition: background-color 0.3s ease, color 0.3s ease;
+}

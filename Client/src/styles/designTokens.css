@@ -1,0 +1,121 @@
+
+/* Design Tokens from Figma */
+:root {
+
+    /* ===== COLORS ===== */
+    --Neutral-950: #0E121B;
+    --Neutral-900: #191B25;
+    --Neutral-800: #232530;
+    --Neutral-700: #2B303B;
+    --Neutral-600: #525866;
+    --Neutral-500: #717784;
+    --Neutral-400: #99A0AE;
+    --Neutral-300: #CACFD8;
+    --Neutral-200: #E0E4EA;
+    --Neutral-100: #F3F5F8;
+    --Neutral-50:  #F5F7FA;
+    --Neutral-0:   #FFFFFF;
+
+    --Blue-700:    #2547D0;
+    --Blue-500:    #335CFF;
+    --Blue-50:     #EBF1FF;
+
+    --Green-500:   #21C16B;
+    --Green-100:   #D1FBE9;
+
+    --Red-500:     #FB3748;
+    --Red-100:     #FFD5D8;
+
+    /* ===== SPACING & RADIUS ===== */
+    --Spacing-0:    0px;
+    --Spacing-025:  2px;
+    --Spacing-050:  4px;
+    --Spacing-075:  6px;
+    --Spacing-100:  8px;
+    --Spacing-150:  12px;
+    --Spacing-200:  16px;
+    --Spacing-250:  20px;
+    --Spacing-300:  24px;
+    --Spacing-400:  32px;
+    --Spacing-500:  40px;
+    --Spacing-600:  48px;
+    --Spacing-700:  56px;
+    --Spacing-800:  64px;
+    --Spacing-1000: 80px;
+
+    --Radius-0:      0px;
+    --Radius-4:      4px;
+    --Radius-6:      6px;
+    --Radius-8:      8px;
+    --Radius-10:    10px;
+    --Radius-12:    12px;
+    --Radius-16:    16px;
+    --Radius-20:    20px;
+    --Radius-24:    24px;
+    --Radius-full: 999px;
+
+    /* ===== TYPOGRAPHY ===== */
+
+    /* == Text-Preset 1 has font weight Bold == */
+    --text-preset-1-font-size: 1.5rem; /* 24px */
+    --text-preset-1-line-height: 120%;
+    --text-preset-1-letter-spacing: -0.5px;
+
+    /* == Text-Preset 2 has font weight Bold == */
+    --text-preset-2-font-size: 1.25rem; /* 20px */
+    --text-preset-2-line-height: 120%;
+    --text-preset-2-letter-spacing: -0.5px;
+
+
+    /* == Text-Preset 3 has font weight Semi Bold == */
+    --text-preset-3-font-size: 1rem; /* 16px */
+    --text-preset-3-line-height: 120%;
+    --text-preset-3-letter-spacing: -0.3px;
+
+    /* == Text-Preset 4 has font weight Medium == */
+    --text-preset-4-font-size: 0.875rem; /* 14px */
+    --text-preset-4-line-height: 120%;
+    --text-preset-4-letter-spacing: -0.2px;
+
+    /* == Text-Preset 5 has font weight Regular == */
+    --text-preset-5-font-size: 0.875rem; /* 14px */
+    --text-preset-5-line-height: 120%;
+    --text-preset-5-letter-spacing: -0.2px;
+
+    /* == Text-Preset 6 has font weight Regular == */
+    --text-preset-6-font-size: 0.75rem; /* 12px */
+    --text-preset-6-line-height: 120%;
+    --text-preset-6-letter-spacing: -0.2px;
+
+    /* Font weights for consistency */
+    --font-weight-regular: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+    
+    /* Font families*/
+    --font-Inter: 'Inter', sans-serif;
+    --font-SourceCodePro: 'SourceCodePro', monospace;
+    --font-NotoSerif: 'NotoSerif', serif;
+}
+
+/* === Fonts Utility classes === */
+@font-face {
+    font-family: 'Inter';/*Default Font used in Webapp, user can select between other 2 fonts in settings*/
+    src: url('/src/assets/fonts/inter/Inter-VariableFont_opsz,wght.ttf') format('truetype');
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'NotoSerif';
+    src: url('/src/assets/fonts/noto-serif/NotoSerif-VariableFont_wdth,wght.ttf') format('truetype');
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'SourceCodePro';
+    src: url('/src/assets/fonts/source-code-pro/SourceCodePro-VariableFont_wght.ttf') format('truetype');
+    font-display: swap;
+}
+
+

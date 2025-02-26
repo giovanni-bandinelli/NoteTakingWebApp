@@ -1,0 +1,49 @@
+*, *::after, *::before {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+button,input { all: unset; }
+
+/* Typography Presets */
+.text-preset-1 {
+    font-size: var(--text-preset-1-font-size);
+    font-weight: var(--font-weight-bold);
+    line-height: var(--text-preset-1-line-height);
+    letter-spacing: var(--text-preset-1-letter-spacing);
+}
+
+.text-preset-2 {
+    font-size: var(--text-preset-2-font-size);
+    font-weight: var(--font-weight-bold);
+    line-height: var(--text-preset-2-line-height);
+    letter-spacing: var(--text-preset-2-letter-spacing);
+}
+
+.text-preset-3 {
+    font-size: var(--text-preset-3-font-size);
+    font-weight: var(--font-weigth-semibold);
+    line-height: var(--text-preset-3-line-height);
+    letter-spacing: var(--text-preset-3-letter-spacing);
+}
+
+.text-preset-4 {
+    font-size: var(--text-preset-4-font-size);
+    font-weight: var(--font-weight-medium);
+    line-height: var(--text-preset-4-line-height);
+    letter-spacing: var(--text-preset-4-letter-spacing);
+}
+
+.text-preset-5 {
+    font-size: var(--text-preset-5-font-size);
+    font-weight: var(--font-weight-regular);
+    line-height: var(--text-preset-5-line-height);
+    letter-spacing: var(--text-preset-5-letter-spacing);
+}
+
+.text-preset-6 {
+    font-size: var(--text-preset-6-font-size);
+    font-weight: var(--font-weight-regular);
+    line-height: var(--text-preset-6-line-height);
+    letter-spacing: var(--text-preset-6-letter-spacing);
+}
