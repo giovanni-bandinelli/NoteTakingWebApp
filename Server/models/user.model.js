@@ -15,6 +15,13 @@ export async function createUser(email, hashedPassword) {
     return rows[0];
 }
 
+export async function updateUserPassword(email, password){
+    const { rows } = await pool.query(
+        "UPDATE users SET password=$1 WHERE email=$2 RETURNING *",
+        [password,email]
+    );
+    return rows[0];
+}
 // Store Google User
 export async function createGoogleUser(email) {
     const { rows } = await pool.query(

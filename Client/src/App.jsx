@@ -41,9 +41,8 @@ export default function App() {
               element={<ForgotPasswordPage />}
             />
 
-            {/* idk how this one would actually be implemented ngl */}
             <Route 
-              path="/auth/reset-password/:token" 
+              path="/auth/reset-password" 
               element={<ResetPasswordPage />}
             />
 

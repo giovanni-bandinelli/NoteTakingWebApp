@@ -36,3 +36,26 @@ export async function googleLoginAPI(googleToken){
   return data.token;
 };
 
+
+//ForgottenPassword
+export async function sendRecoveryEmail(email) {
+  const res = await fetch(`${API_URL}/auth/forgot-password`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ email }),
+  });
+
+  if (!res.ok) throw new Error('Password reset request failed');
+  return res.json();
+}
+
+export async function changePasswordAPI(linkToken,newPassword) {
+  const res = await fetch(`${API_URL}/auth/reset-password`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ linkToken, newPassword }),
+  });
+
+  if (!res.ok) throw new Error('Password reset failed');
+  return res.json();
+}

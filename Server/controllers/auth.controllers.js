@@ -1,7 +1,8 @@
 import bcrypt from 'bcryptjs';
-
-import { generateJwtToken } from '../utils/generateJWT.js';
-import { findUserByEmail, createUser, createGoogleUser } from '../models/user.model.js';
+import jwt from 'jsonwebtoken';
+import { generateJwtToken, generateResetToken } from '../utils/generateJWT.js';
+import sendResetPasswordEmail from '../utils/sendEmail.js';
+import { findUserByEmail, createUser, createGoogleUser, updateUserPassword } from '../models/user.model.js';
 import pool from '../config/db.js';
 
 // Register User
@@ -79,3 +80,60 @@ export async function googleAuth(req, res) {
         res.status(500).json({ message: 'Google Authentication Failed' });
     }
 }
+
+// PASSWORD RECOVERY CONTROLLERS:
+
+// 1)Send password reset email
+export async function forgotPassword(req, res) {
+    const { email } = req.body;
+    
+    try {
+      const user = await findUserByEmail(email);
+      if (!user || user.provider === "google") return res.status(404).json({ message: 'Email has not been used to register with local provider' });
+  
+      const resetToken = generateResetToken(user.email);
+  
+      // Send email with reset link (includes token)
+      const resetLink = `${process.env.CLIENT_URL_DEV}/auth/reset-password/?token=${resetToken}`;
+      await sendResetPasswordEmail(email, resetLink);  
+  
+      res.status(200).json({ message: 'Password reset link sent to your email' });
+    } catch (error) {
+      console.error('Forgot Password Error:', error);
+      res.status(500).json({ message: 'Server Error' });
+    }
+  }
+
+// 2)Verify reset token (so frontend knows it's valid)
+export function verifyResetToken(req, res) {
+    const token = req.headers['authorization']?.split(' ')[1];
+
+    if (!token) {
+        return res.status(403).json({ message: 'Token is missing' });
+    }
+
+    jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
+        if (err) {
+            return res.status(403).json({ message: 'Invalid or expired token' });
+        }
+
+        return res.status(200).json({ email: decoded.email }); // Send email in response
+    });
+}
+
+  // 3) Reset password with valid token
+  export async function resetPassword(req, res) {
+    const { linkToken, newPassword } = req.body;
+    try {
+        const decoded = jwt.verify(linkToken, process.env.JWT_SECRET);
+        const email = decoded.email;
+        const hashedPassword = await bcrypt.hash(newPassword, 10);
+
+        await updateUserPassword(email,hashedPassword);
+
+        res.status(200).json({ message: 'Password has been updated!' });
+    }catch (error) {
+        console.error('Reset Password Error:', error);
+        res.status(500).json({ message: 'Server Error' });
+    }
+  }

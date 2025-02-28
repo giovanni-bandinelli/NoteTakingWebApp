@@ -10,55 +10,58 @@ export function useAuth() {
 
 // AuthProvider Component
 export function AuthProvider({ children }) {
-    // Start with no token and unauthenticated state.
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [token, setToken] = useState(null);
 
-    // On mount, check localStorage and set token if it exists.
+    // Decode JWT token and check expiration
+    const decodeToken = (token) => {
+        const payload = JSON.parse(window.atob(token.split('.')[1]));
+        return payload;
+    };
+
+    // On mount, check localStorage and set token if it exists
     useEffect(() => {
         const storedToken = localStorage.getItem('authToken');
-        console.log('🔹 Initial token from localStorage:', storedToken);
         if (storedToken) {
-            setToken(storedToken);
+            const decoded = decodeToken(storedToken);
+            if (decoded.exp * 1000 < Date.now()) {
+                localStorage.removeItem('authToken');
+                setToken(null);
+                setIsAuthenticated(false);
+            } else {
+                setToken(storedToken);
+            }
         }
     }, []);
 
-    // Whenever the token state changes, verify it.
+    // Whenever the token state changes, verify it
     useEffect(() => {
         if (!token) {
-            console.log('❌ No token, user not authenticated.');
             setIsAuthenticated(false);
-            return;
+        } else {
+            verifyToken(token);
         }
-
-        async function verifyToken() {
-            console.log('🔹 Verifying token:', token);
-
-            const headers = {'Authorization': `Bearer ${token}`};
-
-            console.log('🔹 Headers being sent:', headers);
-
-      
-            try {
-                const response = await fetch('http://localhost:5000/auth/verify', {
-                    method: 'GET',
-                    headers
-                });
-                console.log('🔹 Server response:', response.status);
-                if (response.ok) {
-                    setIsAuthenticated(true);
-                } else {
-                    setIsAuthenticated(false);
-                    localStorage.removeItem('authToken');
-                }
-            } catch (err) {
-                console.error('⚠️ Error verifying token:', err);
-                setIsAuthenticated(false);
-            }
-        }
-
-        verifyToken();
     }, [token]);
+
+    const verifyToken = async (token) => {
+
+        try {
+            const response = await fetch('http://localhost:5000/auth/verify', {
+                method: 'GET',
+                headers:{'Authorization': `Bearer ${token}`} ,
+            });
+            if (response.ok) {
+                setIsAuthenticated(true);
+            } else {
+                setIsAuthenticated(false);
+                localStorage.removeItem('authToken');
+            }
+        } catch (err) {
+            console.error(' Error verifying token:', err);
+            setIsAuthenticated(false);
+            localStorage.removeItem('authToken');
+        }
+    };
 
     return (
         <AuthContext.Provider value={{ isAuthenticated, setIsAuthenticated }}>

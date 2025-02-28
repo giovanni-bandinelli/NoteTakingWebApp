@@ -6,7 +6,6 @@ export function verifyToken(req, res, next) {
     const token = req.headers['authorization']?.split(' ')[1];  //<-- http headers get normalized to lowecased, spent hours trying to solve bug here T-T
     console.log('🔹 Token received:', token); // Log received token
     
-
     if (!token) {
         console.log('❌ No token found');
         return res.status(403).json({ message: 'Token is missing' });
@@ -18,8 +17,10 @@ export function verifyToken(req, res, next) {
             return res.status(403).json({ message: 'Invalid or expired token' });
         }
 
-        console.log('✅ Token verified for user:', decoded.userId);
-        req.userId = decoded.userId; // Store userId for route access
+        console.log('✅ Token verified for user:', decoded.email);
+        req.email = decoded.email; // Store email for route access <--I don't remember why i added this
         next();
     });
 }
+
+

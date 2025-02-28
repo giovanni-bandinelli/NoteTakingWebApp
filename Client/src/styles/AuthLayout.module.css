@@ -52,6 +52,13 @@
     gap: var(--Spacing-100);
 }
 
+.errorMessage{
+    display: flex;
+    align-items: center;
+    gap: var(--Spacing-100);
+    color: var(--Red-500);
+}
+
 /* Input Styles */
 .input {
     width: calc(100% - var(--Spacing-400));

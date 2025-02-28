@@ -1,10 +1,27 @@
-import { useState, } from 'react';
-import { AppLogo, InfoIcon} from '../../components/icons';
 
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import sharedStyles from '../../styles/AuthLayout.module.css';
-export default function ForgotPasswordPage() {
-    const [email, setEmail] = useState('');
+import { AppLogo, InfoIcon} from '../../components/icons';
+import { sendRecoveryEmail } from '../../api/auth.api.js'; // Make sure to implement this in your API file
+
+export default function ForgottenPasswordPage() {
+  const [email, setEmail] = useState('');
+  const [message, setMessage] = useState('');
+  const navigate = useNavigate();
+
+  async function handleSubmit(e){
+    e.preventDefault();
+    try {
+      await sendRecoveryEmail(email);
+      setMessage('If the email exists, a password reset link has been sent.');
+      navigate('/');  // Redirect user to login page (or stay on this page based on your UX)
+    } catch (error) {
+      setMessage('An error occurred. Please try again.');
+      console.error(error);
+    }
+  };
 
   return (
     <div className={sharedStyles.authPageWrapper}>
@@ -18,7 +35,7 @@ export default function ForgotPasswordPage() {
                 Enter your email below, and we'll send you a link to reset it.
             </p>
         </header>
-        <form onSubmit={()=>(console.log("Hiiii!!!"))} className={sharedStyles.form}>
+        <form onSubmit={handleSubmit} className={sharedStyles.form}>
 
             <div className={sharedStyles.formGroup}>
                 <label className="text-preset-4">Email Address</label>
@@ -36,6 +53,7 @@ export default function ForgotPasswordPage() {
                 <span>Send Reset Link</span>
             </button>
         </form>
+        {message && <p>{message}</p>}
       </div>
     </div>)
 }
