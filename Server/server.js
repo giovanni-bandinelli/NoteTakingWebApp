@@ -10,7 +10,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.use('/auth', authRoutes);//import authRoutes from './routes/auth.routes.js';
+app.use('/auth', authRoutes);
 
 app.get('/', (req, res) => {
     res.send('Server is running...');

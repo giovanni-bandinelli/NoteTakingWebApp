@@ -5,7 +5,7 @@ import { useGoogleLogin } from '@react-oauth/google';
 import { AuthContext } from '../../context/AuthContext';
 import { loginAPI, registerAPI, googleLoginAPI} from '../../api/auth.api.js'
 
-import { AppLogo, GoogleIcon } from '../../components/icons';
+import { AppLogo, GoogleIcon, InfoIcon } from '../../components/icons';
 import PasswordInput from '../../components/PasswordInput/PasswordInput';
 
 import sharedStyles from '../../styles/AuthLayout.module.css';
@@ -117,6 +117,7 @@ function FormSection({ isLogin, setIsAuthenticated }) {
           )}
         </div>
         <PasswordInput password={password} setPassword={setPassword} />
+        {!isLogin && (<p className={sharedStyles.hintText}><InfoIcon/>At least 8 characters</p>)}
       </div>
 
       <button type="submit" className={sharedStyles.submitButton}>
