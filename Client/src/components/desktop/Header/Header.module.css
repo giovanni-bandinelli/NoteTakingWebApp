@@ -1,0 +1,13 @@
+/*lef-rigth "global" padding is the same for heaedr and 3 columns under it so its defined in DesktopLayout.module.css*/
+.header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header > .wrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}

@@ -14,6 +14,7 @@ export async function loginAPI(email, password){
   return data.token;
 };
 
+
 export async function registerAPI (email, password){
   const res = await fetch(`${API_URL}/auth/register`, {
     method: 'POST',
