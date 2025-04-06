@@ -1,0 +1,37 @@
+
+
+.NavSideBar{
+    padding:var(--Spacing-200);
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid var(--border-color);
+    gap:var(--Spacing-200);
+}
+
+.NavSideBar > ul{
+    list-style-type:none;
+}
+
+.NavSideBar > ul > li{
+    margin-bottom: 0.5rem;
+}
+
+.divider {
+    display: flex;
+}
+.divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background-color: var(--border-color);
+}
+
+.tagListTitle{
+    color:var(--Neutral-500);
+    padding: var(--Spacing-100);
+}
+
+.tagList{
+    overflow-y: auto;
+    max-height: fit-content;
+}

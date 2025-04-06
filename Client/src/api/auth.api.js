@@ -60,3 +60,4 @@ export async function changePasswordAPI(linkToken,newPassword) {
   if (!res.ok) throw new Error('Password reset failed');
   return res.json();
 }
+

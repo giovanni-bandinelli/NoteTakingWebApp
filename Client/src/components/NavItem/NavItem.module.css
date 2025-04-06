@@ -1,0 +1,40 @@
+.navItem {
+    list-style: none;
+    color: var(--text-color-secondary);
+}
+
+.navButton {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: calc(100% - 24px);
+    padding: 10px 12px;
+
+    border: none;
+    border-radius: var(--Radius-8);
+    text-align: left;
+
+    transition: all 0.2s ease;
+}
+
+.icon{font-size: 0.875rem;}/* same as text-preset-4*/
+
+.contentWrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.navButton:hover, .navButton.active{
+    background-color: var(--default-hover-color);
+}
+
+.navButton:hover .icon, .navButton.active .icon{
+    color: var(--Blue-500);
+}
+
+.arrow { opacity: 0; }
+
+.navButton:hover .arrow, .navButton.active .arrow{
+    opacity: 1;
+}

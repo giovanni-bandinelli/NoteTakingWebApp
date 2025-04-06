@@ -4,6 +4,7 @@
     box-sizing: border-box;
 }
 button,input { all: unset; }
+button:hover{cursor: pointer;}
 
 /* Typography Presets */
 .text-preset-1 {

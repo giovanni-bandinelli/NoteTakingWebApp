@@ -1,27 +1,16 @@
 
-import DesktopHeader from '../components/desktop/Header/Header';
-import styles from './DesktopLayout.module.css'
+import Header from '../components/desktop/Header/Header';
+import NavSidebar from '../components/desktop/NavSidebar/NavSidebar';
+import MainView from '../components/desktop/MainView/MainView';
+import styles from './DesktopLayout.module.css' //desktopContainer & Grid Styling only
 
 export default function DesktopLayout() {
+
   return (
     <div className={styles.desktopContainer}>
-
-      <DesktopHeader />
-
+        <NavSidebar className={styles.navbar} /> 
+        <Header className={styles.header} />      
+        <MainView className={styles.mainView} />
     </div>
   );
 }
-
-{/**
-
-import DesktopNavSidebar from '../components/desktop/DesktopNavSidebar';
-import DesktopNotesList from '../components/desktop/DesktopNotesList';
-import DesktopNoteContent from '../components/desktop/DesktopNoteContent';
-import DesktopActionsPanel from '../components/desktop/DesktopActionsPanel';
-
-<DesktopNavSidebar />
-<DesktopNotesList />
-<DesktopNoteContent />
-<DesktopActionsPanel />    
-    
- */}

@@ -116,7 +116,7 @@ function FormSection({ isLogin, setIsAuthenticated }) {
             </button>
           )}
         </div>
-        <PasswordInput password={password} setPassword={setPassword} />
+        <PasswordInput password={password} setPassword={setPassword} placeholderText={"Enter your password"} />
         {!isLogin && (<p className={sharedStyles.hintText}><InfoIcon/>At least 8 characters</p>)}
       </div>
 

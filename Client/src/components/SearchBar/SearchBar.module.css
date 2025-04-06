@@ -2,7 +2,7 @@
 .input {
     width: 16rem;
     padding: var(--Spacing-150) var(--Spacing-200);
-    border: 1px solid var(--Neutral-500);
+    border: 1px solid var(--border-color);
     border-radius: var(--Radius-8);
     padding-left: 2.5rem;
 }
@@ -32,8 +32,4 @@
     left: 0.75rem;
     top: 50%;
     transform: translateY(-50%);  /* Centers vertically */
-}
-
-.SearchBarButton:hover{
-    cursor: crosshair;
 }

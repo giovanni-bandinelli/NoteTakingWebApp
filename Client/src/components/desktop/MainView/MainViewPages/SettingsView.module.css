@@ -1,0 +1,65 @@
+.firstColumn{
+    grid-column: 1/4;
+    padding: 16px 32px;
+    border-right: 1px solid var(--border-color);
+}
+
+.firstColumn > ul> *{
+    margin-bottom: 0.5rem;
+}
+
+.divider {
+    display: flex;
+}
+.divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background-color: var(--border-color);
+}
+
+.settingsContent{
+    grid-column: 4/10;
+    padding: 24px 0px;
+}
+/*Color & Font Forms styling*/
+.themeForm{
+    display: flex;
+    flex-direction: column;
+    gap: var(--Spacing-300);
+}
+.optionWrapper{
+    display: flex;
+    flex-direction: column;
+    gap: var(--Spacing-150);
+}
+.buttonWrapper{
+    display: flex;
+    flex-direction: row-reverse;
+}
+.submitButton{
+  padding: var(--Spacing-200);
+  background-color: var(--Blue-500);
+  color: white;
+  border: none;
+  border-radius: var(--Radius-8);
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.submitButton:hover{ background-color: var(--Blue-700);}
+
+/*Change Password*/
+.passwordInputsWrapper{
+    display: flex;
+    flex-direction: column;
+    gap: var(--Spacing-300);
+}
+.passwordInputsWrapper > label > h3 { margin-bottom: 5px;}
+
+.hintText{
+    display: flex;
+    align-items: center;
+    gap: var(--Spacing-100);
+    margin-top: 5px;
+}

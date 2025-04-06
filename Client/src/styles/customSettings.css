@@ -1,22 +1,55 @@
 
-/*Design tokens are taken from global.css(might rename it designTokens.css, this (App.css) manages user's settings css */
-
+/*Design tokens are taken from designTokens.css(duh)
 
 /* === Theme Variables === */
 
 [data-theme="light"] {
-    --background-color: var(--Neutral-0);/*idk how to manage this, should this be considered the bg color of the form card component or whole page*/
-    --background-color-secondary: var(--Neutral-100);
+    --background-color: var(--Neutral-0);
+    --background-color-secondary: var(--Neutral-100);/*used only in background color of auth related pages*/
+
     --text-color-main: var(--Neutral-950);/*used by headings, for links, labels etc*/
     --text-color-secondary: var(--Neutral-600);/*used by paragraph only, at least in AuthPage*/
+
+    --border-color: var(--Neutral-200);
+    --default-hover-color: var(--Neutral-100);
 }
 
 [data-theme="dark"] {
     --background-color: var(--Neutral-950);
     --background-color-secondary: var(--Neutral-700);
+
     --text-color-main: var(--Neutral-0);
+    --text-color-secondary: var(--Neutral-300);
+
+    --border-color: var(--Neutral-800);
+    --default-hover-color: var(--Neutral-800);
 }
 
+/*System theme setting pure css, perhaps an ungly solution due to code duplication?*/
+
+/* System theme - light preference */
+@media (prefers-color-scheme: light) {
+    [data-theme="system"] {
+      --background-color: var(--Neutral-0);
+      --background-color-secondary: var(--Neutral-100);
+      --text-color-main: var(--Neutral-950);
+      --text-color-secondary: var(--Neutral-600);
+      --border-color: var(--Neutral-200);
+      --default-hover-color: var(--Neutral-100);
+    }
+  }
+  
+  /* System theme - dark preference */
+  @media (prefers-color-scheme: dark) {
+    [data-theme="system"] {
+      --background-color: var(--Neutral-950);
+      --background-color-secondary: var(--Neutral-700);
+      --text-color-main: var(--Neutral-0);
+      --text-color-secondary: var(--Neutral-300);
+      --border-color: var(--Neutral-800);
+      --default-hover-color: var(--Neutral-800);
+    }
+  }
 
 /* === Font Variables === */
 [data-font="sans-serif"]{

@@ -1,0 +1,5 @@
+.mainContent{
+    display: grid;
+    grid-template-columns: repeat(12, 1fr); /* 12-column grid */
+    gap: 24px;
+}

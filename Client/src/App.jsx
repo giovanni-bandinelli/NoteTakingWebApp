@@ -4,11 +4,11 @@ import { AuthProvider, useAuth } from './context/AuthContext';
 import { SettingsProvider } from './context/SettingsContext';
 
 import NotesApp from './pages/NotesApp/NotesApp';
-import SettingsPage from './pages/SettingsPage/SettingsPage';
+
 import AuthPage from './pages/AuthPage/AuthPage';
 import ForgotPasswordPage from './pages/ForgotPasswordPage/ForgotPasswordPage';
 import ResetPasswordPage from './pages/ResetPasswordPage/ResetPasswordPage';
-{/* Password forgot/reset yet to implemet */}
+
 import './styles/designTokens.css';
 import './styles/global.css';
 import './styles/customSettings.css';
@@ -52,14 +52,6 @@ export default function App() {
               element={
                 <PrivateRoute>
                   <NotesApp />
-                </PrivateRoute>
-              }
-            />
-            <Route
-              path="/settings"
-              element={
-                <PrivateRoute>
-                  <SettingsPage />
                 </PrivateRoute>
               }
             />
