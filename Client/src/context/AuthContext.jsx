@@ -12,6 +12,7 @@ export function useAuth() {
 export function AuthProvider({ children }) {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [token, setToken] = useState(null);
+    const API_URL = `${import.meta.env.VITE_API_URL}`;
 
     // Decode JWT token and check expiration
     const decodeToken = (token) => {
@@ -46,7 +47,7 @@ export function AuthProvider({ children }) {
     const verifyToken = async (token) => {
 
         try {
-            const response = await fetch('http://localhost:5000/auth/verify', {
+            const response = await fetch(`${API_URL}/auth/verify`, {
                 method: 'GET',
                 headers:{'Authorization': `Bearer ${token}`} ,
             });

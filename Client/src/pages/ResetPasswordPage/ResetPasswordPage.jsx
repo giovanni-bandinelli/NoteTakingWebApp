@@ -13,6 +13,7 @@ export default function ResetPasswordPage() {
     const [message, setMessage] = useState('')
     const [isValid,setIsValid] = useState(null)
     const location = useLocation();
+    const API_URL = `${import.meta.env.VITE_API_URL}`;
 
     const linkToken = (new URLSearchParams(location.search)).get("token");
     console.log(linkToken);
@@ -25,7 +26,7 @@ export default function ResetPasswordPage() {
         }
         async function verifyToken() {
             try {
-                const response = await fetch('http://localhost:5000/auth/verify', {
+                const response = await fetch(`${API_URL}/auth/verify`, {
                     method: 'GET',
                     headers:{'Authorization': `Bearer ${linkToken}`} ,
                 });
