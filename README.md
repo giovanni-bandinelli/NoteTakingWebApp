@@ -22,7 +22,7 @@ I'm planning to host the client on **Vercel** and the server (plus PostgreSQL DB
 
 ---
 
-### Some Screenshots ()
+### Some Screenshots (since app isn't really an usable mvp yet without setting up some stuff)
 Login Page
   
   ![Login Page](./images/loginPage.png)
