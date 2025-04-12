@@ -5,7 +5,7 @@ import { HidePasswordIcon, ShowPasswordIcon } from '../icons';
 import styles from './PasswordInput.module.css';
 
 
-export default function PasswordInput({ password, setPassword, placeholderText='', autocomplete="on" }) {
+export default function PasswordInput({ password, setPassword, placeholderText='', autocomplete="on",name="password" }) {
     const [passwordIsHidden, setPasswordIsHidden] = useState(true);
   
     const togglePasswordVisibility = () => {
@@ -21,6 +21,7 @@ export default function PasswordInput({ password, setPassword, placeholderText='
           required
           className={`${styles.input} ${styles.passwordInput}`}
           placeholder={placeholderText}
+          name={name}
           autoComplete={autocomplete}
         />
         <button

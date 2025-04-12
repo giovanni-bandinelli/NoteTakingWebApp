@@ -15,14 +15,14 @@ export async function registerUser(req, res) {
             if(existingUser.provider === "google"){//means that email has signed with google provider, merge the 2 ""accounts""
                 const hashedPassword = await bcrypt.hash(password, 10);
                 await pool.query("UPDATE users SET password = $1, provider = 'local+google' WHERE email = $1", [hashedPassword,email]);
-                res.json({ token: generateJwtToken(user.id) });
+                res.json({ token: generateJwtToken(user.email) });
             }else{return res.status(400).json({ message: 'User already exists' })}
         };
 
         const hashedPassword = await bcrypt.hash(password, 10);
         const user = await createUser(email, hashedPassword);
 
-        res.json({ token: generateJwtToken(user.id) });
+        res.json({ token: generateJwtToken(user.email) });
     } catch (error) {
         console.log("Server Error:",error);
         res.status(500).json({ message: 'Server Error' });
@@ -32,23 +32,23 @@ export async function registerUser(req, res) {
 // Login User
 export async function loginUser(req, res) {
     const { email, password } = req.body;
-    console.log("Login attempt for:", email); // Log who is trying to log in
+    console.log("Login attempt for:", email); 
     try {
         const user = await findUserByEmail(email);
         if (!user) {
-            console.log("User not found:", email); // Log if user doesn't exist
+            console.log("User not found:", email); 
             return res.status(401).json({ message: 'Invalid credentials' });
         }
 
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) {
-            console.log("Incorrect password for:", email); // Log wrong password
+            console.log("Incorrect password for:", email);
             return res.status(401).json({ message: 'Invalid credentials' });
         }
         console.log("Login successful for:", email);
-        res.json({ token: generateJwtToken(user.id) });
+        res.json({ token: generateJwtToken(user.email) });
     } catch (error) {
-        console.error("Server Error:", error); // Log any server errors
+        console.error("Server Error:", error); 
         res.status(500).json({ message: 'Server Error' });
     }
 }
@@ -74,13 +74,38 @@ export async function googleAuth(req, res) {
             await pool.query("UPDATE users SET provider = 'local+google' WHERE email = $1", [email]);
         }
 
-        res.json({ token: generateJwtToken(user.id) });
+        res.json({ token: generateJwtToken(user.email) });
     } catch (error) {
         console.log("Google Auth Error:",error);
         res.status(500).json({ message: 'Google Authentication Failed' });
     }
 }
 
+// Password change through settings:
+export async function changePassword(req,res) {
+    const {authtoken, currentPassword, newPassword} = req.body;
+    const decoded = jwt.verify(authtoken, process.env.JWT_SECRET);
+    const email = decoded.email;
+    console.log('Decoded email from JWT:', email);
+    try {
+        const user = await findUserByEmail(email);
+        if(!user){
+            return res.status(401).json({ message: "Request can't be associated to any registered account" });
+        }
+        const isMatch = await bcrypt.compare(currentPassword, user.password);
+        if(!isMatch){
+            return res.status(401).json({message: "Old password isn't valid"});
+        } 
+        const hashedPassword = await bcrypt.hash(newPassword, 10);
+
+        await updateUserPassword(email,hashedPassword);
+        console.log(`updating password for ${email} from " ${currentPassword} " to " ${newPassword} "`);
+        res.status(200).json({ message: 'Password has been updated!' });
+    } catch (error) {
+        console.error("Server Error:", error); // Log any server errors
+        res.status(500).json({ message: 'Server Error' });
+    }
+}
 // PASSWORD RECOVERY CONTROLLERS:
 
 // 1)Send password reset email
@@ -137,3 +162,4 @@ export function verifyResetToken(req, res) {
         res.status(500).json({ message: 'Server Error' });
     }
   }
+

@@ -11,6 +11,7 @@ import styles from './SettingsView.module.css';
 
 import {AuthContext} from '../../../../context/AuthContext';
 import { useSettings } from '../../../../context/SettingsContext';
+import { changePasswordAPI } from '../../../../api/auth.api';
 
 
 export default function SettingsView() {
@@ -173,7 +174,27 @@ function FontSettings() {
 // Third option: Change Password Setting
 
 function ChangePassword(){
-    function handleSubmit(){console.log("HIIII!!!")}
+
+    const [currentPassword, setCurrentPassword] = useState('');
+    const [newPassword, setNewPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
+
+    async function handleSubmit(e){
+        e.preventDefault();
+
+        if(confirmPassword !== newPassword){
+            console.log("Password Confirmation doesnt match");//TO DO: Add visual clue for user :)
+        }
+        const token = localStorage.getItem('authToken');
+        try {
+            await changePasswordAPI(token, currentPassword, newPassword);
+            console.log("Password changed successfully!");
+            // Show success message, redirect, clear inputs etc
+          } catch (err) {
+            console.error("Error changing password:", err);
+            // Show user-friendly error message
+          }
+    }
     return (
         <form className={styles.themeForm} onSubmit={handleSubmit} autoComplete='off'>
             <div className="titleWrapper">
@@ -183,21 +204,36 @@ function ChangePassword(){
             <div className={styles.passwordInputsWrapper}>
                 <label> 
                     <h3 className='text-preset-4'>Old Password</h3>
-                    <PasswordInput autocomplete="off"/>
+                    <PasswordInput 
+                        name="current-password " 
+                        autocomplete="current-password"
+                        password={currentPassword}
+                        setPassword={setCurrentPassword}
+                    />
                 </label>
                 <label>
                     <h3 className='text-preset-4'>New Password</h3>
-                    <PasswordInput autocomplete="off"/>
+                    <PasswordInput 
+                        name="new-password" 
+                        autocomplete="new-password"
+                        password={newPassword}
+                        setPassword={setNewPassword}
+                    />
                     <p className={`${styles.hintText} text-preset-5`}><InfoIcon style={{fontSize:"var(--text-preset-5-font-size)",stroke:"red"}} />At least 8 characters</p>    
                 </label>
                 <label>
                     <h3 className='text-preset-4'>Confirm New Password</h3>
-                    <PasswordInput autocomplete="off"/>
+                    <PasswordInput 
+                        name="confirm-password" 
+                        autocomplete="new-password"
+                        password={confirmPassword}
+                        setPassword={setConfirmPassword}
+                    />
                 </label>
             </div>
 
             <div className={styles.buttonWrapper}>
-                <button type="submit" className={styles.submitButton} id="applyButton">Save Password</button>
+                <button type="submit" className={styles.submitButton} id="applyButton" >Save Password</button>
             </div>
         </form>
     );

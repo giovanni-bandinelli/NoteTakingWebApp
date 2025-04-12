@@ -3,7 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 
 import { AppLogo, InfoIcon} from '../../components/icons';
 import PasswordInput from '../../components/PasswordInput/PasswordInput';
-import { changePasswordAPI} from '../../api/auth.api.js'//to define
+import { resetPasswordAPI} from '../../api/auth.api.js'//to define
 
 import styles from '../../styles/AuthLayout.module.css';
 export default function ResetPasswordPage() {
@@ -51,7 +51,7 @@ export default function ResetPasswordPage() {
             return
         }
         try {
-            await changePasswordAPI(linkToken,newPassword);//password can be taken from form, but email maybe extracted from token(server logic to modify)??
+            await resetPasswordAPI(linkToken,newPassword);
         } catch (error) {
             setMessage('An error occurred. Please try again.');
             console.error(error);

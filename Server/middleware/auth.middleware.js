@@ -1,10 +1,10 @@
 import jwt from 'jsonwebtoken';
 
 export function verifyToken(req, res, next) {
-    console.log('🔹 Middleware hit: verifyToken'); 
+    console.log(' Middleware hit: verifyToken'); 
 
     const token = req.headers['authorization']?.split(' ')[1];  //<-- http headers get normalized to lowecased, spent hours trying to solve bug here T-T
-    console.log('🔹 Token received:', token); // Log received token
+    console.log('Token received:', token); // Log received token
     
     if (!token) {
         console.log('❌ No token found');

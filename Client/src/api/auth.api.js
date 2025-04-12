@@ -50,7 +50,8 @@ export async function sendRecoveryEmail(email) {
   return res.json();
 }
 
-export async function changePasswordAPI(linkToken,newPassword) {
+// Reset Password from email recovery link
+export async function resetPasswordAPI(linkToken,newPassword) {
   const res = await fetch(`${API_URL}/auth/reset-password`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -61,3 +62,19 @@ export async function changePasswordAPI(linkToken,newPassword) {
   return res.json();
 }
 
+// Change password from settings
+export async function changePasswordAPI(authtoken,currentPassword,newPassword) {
+
+  const res = await fetch(`${API_URL}/auth/change-password`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ authtoken, currentPassword, newPassword }),
+  });
+
+  if (!res.ok) {
+    const errorBody = await res.json();
+    throw new Error(`Password change failed: ${res.status} - ${errorBody.message}`);
+  }
+
+  return res.json();
+}
