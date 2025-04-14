@@ -9,7 +9,7 @@ import PasswordInput from '../../../PasswordInput/PasswordInput';
 
 import styles from './SettingsView.module.css'; 
 
-import {AuthContext} from '../../../../context/AuthContext';
+import { useAuth } from '../../../../context/AuthContext';
 import { useSettings } from '../../../../context/SettingsContext';
 import { changePasswordAPI } from '../../../../api/auth.api';
 
@@ -17,21 +17,13 @@ import { changePasswordAPI } from '../../../../api/auth.api';
 export default function SettingsView() {
     const [selectedOption, setSelectedOption] = useState("theme");
 
-    const { setIsAuthenticated } = useContext(AuthContext);
-    const navigate = useNavigate();
+    const { logout } = useAuth();
 
     function renderSettingsContent() {
         if (selectedOption === "theme") return <ThemeSettings/>;
         if (selectedOption === "font") return <FontSettings/>;
         if (selectedOption === "password") return <ChangePassword/>;
         return <p>how are you even getting this bruh??</p>;
-    }
-
-    function handleLogout(){
-        
-        localStorage.removeItem('authToken');
-        setIsAuthenticated(false);
-        navigate("/auth");
     }
 
     return (
@@ -43,7 +35,7 @@ export default function SettingsView() {
                     <NavItem icon={FontIcon} label="Font Theme" isActive={selectedOption === "font"} onClick={() => setSelectedOption("font")} />
                     <NavItem icon={LockIcon} label="Change Password" isActive={selectedOption === "password"} onClick={() => setSelectedOption("password")} />
                     <div className={styles.divider}></div>
-                    <NavItem icon={LogoutIcon} label="Logout" isActive={selectedOption === "logout"} onClick={()=>handleLogout()} />
+                    <NavItem icon={LogoutIcon} label="Logout" isActive={selectedOption === "logout"} onClick={()=>logout()} />
                 </ul>
             </aside>
 

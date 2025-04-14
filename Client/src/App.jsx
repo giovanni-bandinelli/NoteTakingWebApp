@@ -27,37 +27,33 @@ export default function App() {
   const { isAuthenticated } = useAuth();
   
   return (
-    <AuthProvider>
-      <SettingsProvider>
-        <BrowserRouter>
-          <Routes>
-            {/* Public Route */}
-            <Route
-              path="/auth"
-              element={!isAuthenticated ? <AuthPage /> : <Navigate to="/" />}
-            />
-            <Route
-              path="/auth/forgot-password"
-              element={<ForgotPasswordPage />}
-            />
+    <BrowserRouter>
+      <Routes>
+        {/* Public Route */}
+        <Route
+          path="/auth"
+          element={!isAuthenticated ? <AuthPage /> : <Navigate to="/" />}
+        />
+        <Route
+          path="/auth/forgot-password"
+          element={<ForgotPasswordPage />}
+        />
 
-            <Route 
-              path="/auth/reset-password" 
-              element={<ResetPasswordPage />}
-            />
+        <Route 
+          path="/auth/reset-password" 
+          element={<ResetPasswordPage />}
+        />
 
-            {/* Protected Routes */}
-            <Route
-              path="/"
-              element={
-                <PrivateRoute>
-                  <NotesApp />
-                </PrivateRoute>
-              }
-            />
-          </Routes>
-        </BrowserRouter>
-      </SettingsProvider>
-    </AuthProvider>
+        {/* Protected Routes */}
+        <Route
+          path="/"
+          element={
+            <PrivateRoute>
+              <NotesApp />
+            </PrivateRoute>
+          }
+        />
+      </Routes>
+    </BrowserRouter>
   );
 }
