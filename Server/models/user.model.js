@@ -6,6 +6,7 @@ export async function findUserByEmail(email) {
     return rows[0];
 }
 
+
 // Create new user
 export async function createUser(email, hashedPassword) {
     const { rows } = await pool.query(

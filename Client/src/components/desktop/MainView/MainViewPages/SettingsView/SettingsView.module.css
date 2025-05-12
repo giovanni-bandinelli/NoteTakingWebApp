@@ -1,0 +1,27 @@
+/* Sidebar Styles */
+.sidebar {
+    grid-column: 1/4;
+    padding: 16px 32px;
+    border-right: 1px solid var(--border-color);
+}
+
+.sidebar > ul > * {
+    margin-bottom: 0.5rem;
+}
+
+.divider {
+    display: flex;
+}
+
+.divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background-color: var(--border-color);
+}
+
+/* Main Content Section */
+.settingsContent {
+    grid-column: 4/10;
+    padding: var(--Spacing-250);
+}

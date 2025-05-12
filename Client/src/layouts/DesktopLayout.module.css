@@ -1,9 +1,9 @@
 .desktopContainer{
-    height: 100vh;
-
-    display: grid;
-    grid-template-columns: 275px 1fr;
-    grid-template-rows: auto 1fr;
+  height: 100vh;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: 275px 1fr;
+  grid-template-rows: auto 1fr;
 
 }
 

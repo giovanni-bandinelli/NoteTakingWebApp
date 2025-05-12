@@ -1,5 +1,8 @@
 .mainContent{
     display: grid;
     grid-template-columns: repeat(12, 1fr); /* 12-column grid */
-    gap: 24px;
+    grid-template-rows: 1fr;
+    /*gap: 24px;*/
+    height: 100%;
+    min-height: 0;
 }

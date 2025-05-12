@@ -76,6 +76,7 @@ export function AuthProvider({ children }) {
     return (
         <AuthContext.Provider value={{
             isAuthenticated,
+            token,
             setIsAuthenticated, 
             logout 
         }}>

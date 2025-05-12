@@ -120,7 +120,7 @@ function FormSection({ isLogin, setIsAuthenticated }) {
         {!isLogin && (<p className={sharedStyles.hintText}><InfoIcon/>At least 8 characters</p>)}
       </div>
 
-      <button type="submit" className={sharedStyles.submitButton}>
+      <button type="submit" className={`blueButton ${sharedStyles.submitButton}`}>
         <span>{isLogin ? 'Login' : 'Sign Up'}</span>
       </button>
       

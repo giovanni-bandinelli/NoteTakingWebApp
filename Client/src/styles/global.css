@@ -5,6 +5,7 @@
 }
 button,input { all: unset; }
 button:hover{cursor: pointer;}
+ul,ol{list-style: none;}
 
 /* Typography Presets */
 .text-preset-1 {
@@ -47,4 +48,29 @@ button:hover{cursor: pointer;}
     font-weight: var(--font-weight-regular);
     line-height: var(--text-preset-6-line-height);
     letter-spacing: var(--text-preset-6-letter-spacing);
+}
+
+.blueButton{ /*the blue buttons may vary in width/padding so im leaving that out and specifying it in their own specific class */
+    background-color: var(--Blue-500);
+    color: white;
+    border: none;
+    border-radius: var(--Radius-8);
+    transition: background-color 0.2s;
+}
+
+.blueButton:hover{ background-color: var(--Blue-700);}
+
+/* probably an ugly solution, should have been more careful converting the svgs given and passing em to them instead of leaving px,
+i'm doing this to be ablo to resize svgs, 
+most of them are 24px but there are exceptions giving problems, such as the logo ;-;*/
+
+svg { 
+    height: auto;
+    width: 1em; 
+    font-size: 24px; 
+}
+
+svg.logo{ 
+    width: 95px;
+    height: 28px;
 }

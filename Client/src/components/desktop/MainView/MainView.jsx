@@ -1,6 +1,9 @@
 import { useMainView } from '../../../context/MainViewContext';
-import styles from './MainView.module.css'; 
-import SettingsView from './MainViewPages/SettingsView';
+import styles from './MainView.module.css';
+
+import SettingsView from './MainViewPages/SettingsView/SettingsView';
+import NotesView from './MainViewPages/NotesView/NotesView';
+
 
 export default function MainView() {
     const { currentView } = useMainView();
@@ -14,42 +17,11 @@ export default function MainView() {
 
         if (currentView.type === 'all-notes' || currentView.type === 'archived' || currentView.type === 'tag' || currentView.type === 'search') {
             return (
-                <>
-                    <div className={styles.notesList}>
-                        {/** First column - list of notes based on filter */}
-                        <p>Notes List (Filtered)</p>
-                    </div>
-                    <div className={styles.noteContent}>
-                        {/** Second column - note content editor */}
-                        <p>Note Content</p>
-                    </div>
-                    {currentView.type !== 'settings' && currentView.type !== 'search' && (
-                        <div className={styles.noteActions}>
-                            {/** Third column - delete & archive/restore buttons */}
-                            <p>{currentView.type === 'archived' ? 'Restore Note' : 'Archive Note'}</p>
-                            <p>Delete Note</p>
-                        </div>
-                    )}
-                </>
+                <NotesView currentView={currentView}/> //They all share layout and have minor differences...
             );
         }
 
-        if (currentView.type === 'create-note') {
-            return (
-                <>
-                    <div className={styles.notesList}>
-                        {/** First column - list of notes (or empty state) */}
-                        <p>Notes List</p>
-                    </div>
-                    <div className={styles.noteContent}>
-                        {/** Second column - New Note Editor */}
-                        <p>New Note Editor</p>
-                    </div>
-                </>
-            );
-        }
-
-        return <p>Something went wrong</p>; // Fallback if `currentView` is unexpected
+        return <p>Something went wrong, please try reloading the page.</p>; // 99% this should can't ever happen
     }
 
     return (

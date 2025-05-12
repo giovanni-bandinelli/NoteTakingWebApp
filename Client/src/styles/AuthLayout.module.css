@@ -86,20 +86,6 @@
     align-items: center;
 
     width: calc(100% - var(--Spacing-400));
-
     padding: var(--Spacing-200);
-    background-color: var(--Blue-500);
-    color: white;
-    border: none;
-    border-radius: var(--Radius-8);
-
-    cursor: pointer;
-    transition: background-color 0.2s;
     margin-top: var(--Spacing-200);
-
-
-}
-
-.submitButton:hover {
-    background-color: var(--Blue-700);
 }

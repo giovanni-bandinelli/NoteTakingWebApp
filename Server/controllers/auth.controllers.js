@@ -106,6 +106,36 @@ export async function changePassword(req,res) {
         res.status(500).json({ message: 'Server Error' });
     }
 }
+
+
+//GET USER SETTINGS & TAGS:
+export async function getUserProfile(email) {
+    const userRes = await pool.query(
+      'SELECT id, email, theme, font FROM users WHERE email = $1',
+      [email]
+    );
+  
+    const user = userRes.rows[0];
+    if (!user) return null;
+  
+    const tagsRes = await pool.query(
+      `SELECT DISTINCT tags.name
+       FROM tags 
+       JOIN note_tags ON note_tags.tag_id = tags.id
+       WHERE tags.user_id = $1`,
+      [user.id]
+    );
+  
+    return {
+      user: {
+        email: user.email,
+        theme: user.theme,
+        font: user.font
+      },
+      tags: tagsRes.rows.map(row => row.name)
+    };
+  }
+  
 // PASSWORD RECOVERY CONTROLLERS:
 
 // 1)Send password reset email

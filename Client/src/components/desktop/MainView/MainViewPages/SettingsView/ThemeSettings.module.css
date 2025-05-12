@@ -1,0 +1,21 @@
+/* Color & Font Forms Styling */
+.themeForm {
+    display: flex;
+    flex-direction: column;
+    gap: var(--Spacing-300);
+}
+
+.optionWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: var(--Spacing-150);
+}
+
+.buttonWrapper {
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.submitButton {
+    padding: var(--Spacing-200);
+}

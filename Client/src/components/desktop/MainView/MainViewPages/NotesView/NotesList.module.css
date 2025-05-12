@@ -1,0 +1,41 @@
+.notesListColumn {
+    grid-column: 1/4;
+    padding: 20px 16px 20px 32px;
+    border-right: 1px solid var(--border-color);
+
+    display: flex;
+    flex-direction: column;
+    gap: var(--Spacing-250);
+
+    height: 100%;/*  This and fixed units makes the y scroll bar appear but other units such as 100% arent working  */
+    min-height: 0;
+}
+
+.notesList {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    flex: 1 1 auto;  /* Grow and shrink within container */
+    min-height: 0;   /* Prevent overflow issues */
+    display: flex;
+    flex-direction: column;
+    gap: var(--Spacing-150);
+}
+
+
+.createNoteButton{
+    padding: var(--Spacing-150) var(--Spacing-200);
+    width: calc(100% - var(--Spacing-400));
+    text-align: center;
+}
+
+/* slight fix to better center '+' */
+.createNoteButton > span{
+    position: relative;
+    bottom: 1px;
+}
+

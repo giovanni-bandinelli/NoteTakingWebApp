@@ -1,7 +1,6 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 
-import { AuthProvider, useAuth } from './context/AuthContext';
-import { SettingsProvider } from './context/SettingsContext';
+import { useAuth } from './context/AuthContext';
 
 import NotesApp from './pages/NotesApp/NotesApp';
 
@@ -13,7 +12,7 @@ import './styles/designTokens.css';
 import './styles/global.css';
 import './styles/customSettings.css';
 
-//#0E121B changed to currentColor for every svg
+//#0E121B changed to currentColor for every svg to get dark/light options
 
 // PrivateRoute Component for Protected Routes
 

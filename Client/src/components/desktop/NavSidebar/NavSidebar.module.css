@@ -8,10 +8,6 @@
     gap:var(--Spacing-200);
 }
 
-.NavSideBar > ul{
-    list-style-type:none;
-}
-
 .NavSideBar > ul > li{
     margin-bottom: 0.5rem;
 }

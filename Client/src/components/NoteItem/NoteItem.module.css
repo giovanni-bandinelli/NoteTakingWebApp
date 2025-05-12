@@ -1,0 +1,23 @@
+.NoteItem{border-top: 1px solid var(--border-color); width: 100%;}
+.noteButton{
+    display: flex;
+    flex-direction: column;
+    padding: var(--Spacing-100);
+    gap: var(--Spacing-150);
+    width: inherit;
+}
+
+.tagsList{
+    display: flex;
+    flex-direction: row;
+    gap: var(--Spacing-050);
+}
+
+.tag{
+    background-color: var(--border-color);
+    border: 1px solid var(--border-color);
+    border-radius: var(--Radius-4);
+    padding: var(--Spacing-025) var(--Spacing-075);
+}
+
+

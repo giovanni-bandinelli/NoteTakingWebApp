@@ -3,15 +3,15 @@ import NavItem from '../../NavItem/NavItem';
 import TagNavItem from '../../NavItem/TagNavItem';
 
 import styles from './NavSideBar.module.css';
-import { useMainView } from '../../../context/MainViewContext'; 
+import { useMainView } from '../../../context/MainViewContext';
+import { useTags } from '../../../context/TagContext';
 
 export default function NavSideBar({ className }) {
     const { setCurrentView, currentView } = useMainView();
-
-    const mockTags = ["Lorem Ipsum", "Cooking", "Dev","Foobar"];
+    const { tags } = useTags(); 
 
     const handleNavClick = (type) => {
-        setCurrentView({ type: type });
+        setCurrentView({ type });
     };
 
     const handleTagClick = (label) => {
@@ -38,7 +38,7 @@ export default function NavSideBar({ className }) {
             <div className={styles.divider}></div>
             <h2 className={`text-preset-4 ${styles.tagListTitle}`}>Tags</h2>
             <ul className={styles.tagList}>
-                {mockTags.map(tag => (
+                {tags.map(tag => (
                     <TagNavItem 
                         key={tag} 
                         label={tag} 

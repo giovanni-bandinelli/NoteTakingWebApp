@@ -1,0 +1,21 @@
+.noteActions{
+    width: 100%;
+    grid-column: 10/13;
+    display: flex;
+    flex-direction: column;
+    gap: var(--Spacing-150);
+    padding: var(--Spacing-200);
+    padding-right: var(--Spacing-400);
+}
+
+.actionButton{
+    display: flex;
+    flex-direction: row;
+    padding: var(--Spacing-150) var(--Spacing-200);
+    gap: var(--Spacing-100);
+    border: 1px solid var(--border-color);
+    border-radius: var(--Radius-8);
+
+    align-items: center;
+    white-space: nowrap;
+}

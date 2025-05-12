@@ -1,0 +1,81 @@
+.noteContent{
+    grid-column: 4/10;
+    border-right: 1px solid var(--border-color);
+    padding: var(--Spacing-250) var(--Spacing-300);
+    display: flex;
+    flex-direction: column;
+    gap: var(--Spacing-200);
+}
+
+.noteTitleInput::placeholder{
+    color:var(--text-color-main);
+}
+/*   INFO SECTION*/
+.noteContentInfoSection{
+    border-bottom: 1px solid var(--border-color);
+}
+
+.noteContentInfoSection > .noteContentInfo{
+    margin-bottom: var(--Spacing-200);
+}
+
+.noteContentInfo{
+    display: flex;
+    flex-direction: row;
+    gap: var(--Spacing-075);
+}
+
+.noteContentInfo > ul{/*what if there are tons of tags? who knows! To-Do*/
+    display: flex;
+    flex-direction: row;
+    color: var(--text-color-main);
+}
+
+.noteContentInfoTitle{
+    width: 8rem;
+    color: var(--text-color-secondary);
+}
+
+.noteContentInfoTitle > svg{
+    position: relative;
+    top: 2px;/*better centering the icons with their title :) */
+    font-size: var(--text-preset-5-font-size);
+    margin-right: var(--Spacing-075);    
+}
+
+/*   TEXT AREA */
+.noteContentText{
+    border:none;
+    resize: none;
+    font-family: inherit;
+    height: 100%;
+
+    color: var(--text-color-main);
+    background-color: var(--background-color-primary);
+
+    border-bottom: 1px solid var(--border-color);
+}
+.noteContentText:focus{
+    outline: none;
+}
+
+/*   BUTTONS */
+.noteContentOptions{
+    display: flex;
+    flex-direction: row;
+    gap: var(--Spacing-200);
+}
+
+.saveButton{
+    padding: var(--Spacing-150) var(--Spacing-200);
+}
+
+.cancelButton{
+    padding: var(--Spacing-150) var(--Spacing-200);
+    background-color: var(--background-color-secondary);
+    color: var( --text-color-secondary);
+    border: none;
+    border-radius: var(--Radius-8);
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
