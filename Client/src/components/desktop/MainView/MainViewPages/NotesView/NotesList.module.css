@@ -7,7 +7,7 @@
     flex-direction: column;
     gap: var(--Spacing-250);
 
-    height: 100%;/*  This and fixed units makes the y scroll bar appear but other units such as 100% arent working  */
+    height: 100%;
     min-height: 0;
 }
 
@@ -23,6 +23,7 @@
     min-height: 0;   /* Prevent overflow issues */
     display: flex;
     flex-direction: column;
+
     gap: var(--Spacing-150);
 }
 

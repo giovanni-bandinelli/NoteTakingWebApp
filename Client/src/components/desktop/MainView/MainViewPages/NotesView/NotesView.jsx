@@ -28,6 +28,7 @@ export default function NotesView({ currentView }) {
   async function loadNotesAndResetSelection() {
     try {
       const rawNotes  = await getNotesAPI(token, currentView);
+      console.log('raw notes:',rawNotes);
 
       const updatedNotes = rawNotes.map(note => ({
         ...note,

@@ -26,9 +26,9 @@ export async function getFilteredNotes({ userId, archived, tag, search }) {
 
   let query = `
     SELECT n.id AS note_id, n.title, n.archived, n.content, n.created_at, n.last_edited, t.name AS tag
-    FROM notes n
-    LEFT JOIN note_tags nt ON n.id = nt.note_id
-    LEFT JOIN tags t ON nt.tag_id = t.id
+    FROM notes AS n
+    LEFT JOIN note_tags AS nt ON n.id = nt.note_id
+    LEFT JOIN tags AS t ON nt.tag_id = t.id
     WHERE n.user_id = $1
   `;
 
@@ -36,19 +36,25 @@ export async function getFilteredNotes({ userId, archived, tag, search }) {
     conditions.push(`n.archived = true`);
   } else if (archived === 'false') {
     conditions.push(`n.archived = false`);
-    if (tag) {
-      conditions.push(`t.name = $${paramIndex}`);
-      values.push(tag);
-      paramIndex++;
-    } else if (search) {
-      conditions.push(`(
-        n.title ILIKE $${paramIndex} OR 
-        n.content ILIKE $${paramIndex} OR
-        n.id IN (
-          SELECT note_id FROM note_tags nt 
-          JOIN tags t ON nt.tag_id = t.id 
-          WHERE t.name ILIKE $${paramIndex}
-        )
+      if (tag) {
+        conditions.push(`
+          n.id IN (
+            SELECT nt.note_id
+            FROM note_tags nt
+            JOIN tags t ON nt.tag_id = t.id
+            WHERE t.name = $${paramIndex}
+          )`);
+        values.push(tag);
+        paramIndex++;
+      } else if (search) {
+        conditions.push(`(
+          n.title ILIKE $${paramIndex} OR 
+          n.content ILIKE $${paramIndex} OR
+          n.id IN (
+            SELECT note_id FROM note_tags nt 
+            JOIN tags t ON nt.tag_id = t.id 
+            WHERE t.name ILIKE $${paramIndex}
+          )
       )`);
       values.push(`%${search}%`);
       paramIndex++;
