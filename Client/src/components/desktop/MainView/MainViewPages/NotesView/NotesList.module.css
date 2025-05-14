@@ -27,7 +27,6 @@
     gap: var(--Spacing-150);
 }
 
-
 .createNoteButton{
     padding: var(--Spacing-150) var(--Spacing-200);
     width: calc(100% - var(--Spacing-400));
@@ -39,4 +38,13 @@
     position: relative;
     bottom: 1px;
 }
+
+
+
+
+
+
+
+
+
 
