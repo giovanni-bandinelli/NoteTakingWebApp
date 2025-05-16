@@ -2,8 +2,17 @@ import { useState, useEffect } from 'react';
 import NotesList from './NotesList';
 import NoteEditor from './NoteEditor';
 import NoteActions from './NoteActions';
+import ConfirmModal from '../../../../ConfirmModal/ConfirmModal';
 
-import { getNotesAPI, createNoteAPI, updateNoteAPI, toggleNoteStatusAPI, deleteNoteAPI } from '../../../../../api/notesCRUD.api';
+import { DeleteIcon, ArchiveIcon } from '../../../../icons';
+
+import {
+  getNotesAPI,
+  createNoteAPI,
+  updateNoteAPI,
+  toggleNoteStatusAPI,
+  deleteNoteAPI,
+} from '../../../../../api/notesCRUD.api';
 
 import { useAuth } from '../../../../../context/AuthContext';
 import { useTags } from '../../../../../context/TagContext';
@@ -11,32 +20,30 @@ import { useTags } from '../../../../../context/TagContext';
 export default function NotesView({ currentView }) {
   const [notes, setNotes] = useState([]);
   const [selectedNote, setSelectedNote] = useState(null);
-  const {token} = useAuth();
-  const { reloadTags } = useTags();
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [showArchiveModal, setShowArchiveModal] = useState(false);
 
+  const { token } = useAuth();
+  const { reloadTags } = useTags();
 
   function formatDate(dateStr) {
     const date = new Date(dateStr);
     return date.toLocaleDateString('en-GB', {
       day: '2-digit',
-      month: 'short', // "Jan", "Feb" like the Figma file uses
-      year: 'numeric'
+      month: 'short',
+      year: 'numeric',
     });
   }
-  
 
   async function loadNotesAndResetSelection() {
     try {
-      const rawNotes  = await getNotesAPI(token, currentView);
-      console.log('raw notes:',rawNotes);
-
+      const rawNotes = await getNotesAPI(token, currentView);
       const updatedNotes = rawNotes.map(note => ({
         ...note,
-        date: formatDate(note.last_edited || note.created_at) //<-- formatting dates from ISO to 'DD ShortMonth YYYY'
+        date: formatDate(note.last_edited || note.created_at),
       }));
-
       setNotes(updatedNotes);
-      setSelectedNote(updatedNotes.length ? { ...updatedNotes[0], isNew: false } : null); 
+      setSelectedNote(updatedNotes.length ? { ...updatedNotes[0], isNew: false } : null);
     } catch (err) {
       console.error('Failed to load notes:', err);
     }
@@ -44,7 +51,7 @@ export default function NotesView({ currentView }) {
 
   useEffect(() => {
     loadNotesAndResetSelection();
-  }, [currentView.type, currentView.tag, currentView.searchQuery]); // react on all filters, probably not ideal?
+  }, [currentView.type, currentView.tag, currentView.searchQuery]);
 
   function handleSelectNote(noteId) {
     const note = notes.find(n => n.id === noteId);
@@ -59,13 +66,13 @@ export default function NotesView({ currentView }) {
       tags: [],
       content: '',
       archived: false,
-      isNew: true
+      isNew: true,
     };
     setSelectedNote(newNote);
   }
 
   async function handleCancelEdit() {
-    await loadNotesAndResetSelection(); // restore from backend
+    await loadNotesAndResetSelection();
   }
 
   async function handleSaveNote() {
@@ -75,29 +82,31 @@ export default function NotesView({ currentView }) {
       } else {
         await updateNoteAPI(token, selectedNote);
       }
-      await loadNotesAndResetSelection(); //to update notes and tags list
+      await loadNotesAndResetSelection();
       await reloadTags();
     } catch (err) {
       console.error('Failed to save note:', err);
     }
   }
 
-  async function handleArchiveNote() {
+  async function handleConfirmArchive() {
     if (!selectedNote) return;
     try {
       await toggleNoteStatusAPI(token, selectedNote);
       await loadNotesAndResetSelection();
+      setShowArchiveModal(false);
     } catch (err) {
       console.error('Failed to archive note:', err);
     }
   }
 
-  async function handleDeleteNote() {
+  async function handleConfirmDelete() {
     if (!selectedNote) return;
     try {
       await deleteNoteAPI(token, selectedNote.id);
       await loadNotesAndResetSelection();
       await reloadTags();
+      setShowDeleteModal(false);
     } catch (err) {
       console.error('Failed to delete note:', err);
     }
@@ -112,6 +121,7 @@ export default function NotesView({ currentView }) {
         handleCreateNewNote={handleCreateNewNote}
         currentView={currentView}
       />
+
       {selectedNote ? (
         <NoteEditor
           selectedNote={selectedNote}
@@ -122,16 +132,39 @@ export default function NotesView({ currentView }) {
       ) : (
         <section className="noteContent"><p>No note selected or available.</p></section>
       )}
+
       {selectedNote && (
-        <NoteActions
-          currentView={currentView}
-          onArchiveNote={handleArchiveNote}
-          onDeleteNote={handleDeleteNote}
-          isNew={selectedNote.isNew}
-        />
+        <>
+          <NoteActions
+            currentView={currentView}
+            onRequestDelete={() => setShowDeleteModal(true)}
+            onRequestArchive={() => setShowArchiveModal(true)}
+            isNew={selectedNote.isNew}
+          />
+
+          <ConfirmModal
+            isOpen={showDeleteModal}
+            onClose={() => setShowDeleteModal(false)}
+            onConfirm={handleConfirmDelete}
+            icon={<DeleteIcon />}
+            title="Delete Note"
+            message="Are you sure you want to permanently delete this note? This action cannot be undone."
+            confirmLabel="Delete Note"
+            confirmStyle="danger"
+          />
+
+          <ConfirmModal
+            isOpen={showArchiveModal}
+            onClose={() => setShowArchiveModal(false)}
+            onConfirm={handleConfirmArchive}
+            icon={<ArchiveIcon />}
+            title="Archive Note"
+            message="Are you sure you want to archive this note? You can find it in the Archived Notes section and restore it anytime."
+            confirmLabel="Archive Note"
+            confirmStyle="primary"
+          />
+        </>
       )}
     </>
   );
 }
-
-

@@ -39,17 +39,17 @@
     }
   }
   
-  /* System theme - dark preference */
-  @media (prefers-color-scheme: dark) {
+/* System theme - dark preference */
+@media (prefers-color-scheme: dark) {
     [data-theme="system"] {
-      --background-color: var(--Neutral-950);
-      --background-color-secondary: var(--Neutral-700);
-      --text-color-main: var(--Neutral-0);
-      --text-color-secondary: var(--Neutral-300);
-      --border-color: var(--Neutral-600);
-      --default-hover-color: var(--Neutral-800);
+        --background-color: var(--Neutral-950);
+        --background-color-secondary: var(--Neutral-700);
+        --text-color-main: var(--Neutral-0);
+        --text-color-secondary: var(--Neutral-300);
+        --border-color: var(--Neutral-600);
+        --default-hover-color: var(--Neutral-800);
     }
-  }
+}
 
 /* === Font Variables === */
 [data-font="sans-serif"]{

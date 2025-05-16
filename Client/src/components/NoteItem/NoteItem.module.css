@@ -1,8 +1,7 @@
-.NoteItem{border-top: 1px solid var(--border-color); width: 100%;}
+.NoteItem{border-top: 1px solid var(--border-color); width: 100%;padding: var(--Spacing-100);}
 .noteButton{
     display: flex;
     flex-direction: column;
-    padding: var(--Spacing-100);
     gap: var(--Spacing-150);
     width: inherit;
 }

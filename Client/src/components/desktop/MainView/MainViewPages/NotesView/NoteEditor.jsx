@@ -1,5 +1,3 @@
-// NoteEditor.jsx
-import { useState } from 'react';
 import { TagIcon, ClockIcon, StatusIcon } from '../../../../icons';
 import styles from './NoteEditor.module.css'; // Maybe split or reuse styles.
 

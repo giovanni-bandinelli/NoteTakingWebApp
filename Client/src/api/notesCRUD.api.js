@@ -25,7 +25,6 @@ export async function getNotesAPI(token, currentView) {
   const { type, tag, searchQuery } = currentView;
   const params = new URLSearchParams();
   
-  // The key issue - this should be a string comparison, not checking if a variable equals a string
   params.set('archived', type === 'archived' ? 'true' : 'false');
   
   if (type === 'tag' && tag) {

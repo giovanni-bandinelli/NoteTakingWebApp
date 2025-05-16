@@ -1,0 +1,87 @@
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modalCard {
+    background-color: var(--background-color);
+    border-radius: var(--Radius-12);
+    border: 1px solid var(--border-color);
+    width: 100%;
+    max-width: 440px;
+
+    animation: all 0.2s ease-out;
+}
+
+.modalContent {
+    padding: var(--Spacing-250);
+    display:flex ;
+    flex-direction: row;
+    gap: var(--Spacing-200);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.modalText{
+    display: flex;
+    flex-direction: column; 
+    gap:var(--Spacing-075);
+}
+
+.iconContainer{
+    background-color: var(--background-color);
+    border: 1px solid var(--border-color);
+    border-radius: var(--Radius-12);
+    padding: var(--Spacing-100);
+    width: var(--Spacing-500);
+    height: var(--Spacing-500);
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  gap: var(--Spacing-200);
+  padding: var(--Spacing-200) var(--Spacing-250);
+}
+
+.cancelButton {
+    padding: var(--Spacing-150) var(--Spacing-200);
+    background-color: var(--background-color-secondary);
+    color: var( --text-color-secondary);
+    border: none;
+    border-radius: var(--Radius-8);
+    transition: all 0.2s;
+}
+
+.confirmButton {
+    padding: var(--Spacing-150) var(--Spacing-200);
+    color: var(--Neutral-0);
+    border: none;
+    border-radius: var(--Radius-8);
+    transition: all 0.2s;
+}
+
+.confirmButton.danger {background-color: var(--Red-500);}
+.confirmButton.danger:hover {background-color: var(--Red-100);}
+
+.confirmButton.primary {background-color: var(--Green-500);}
+.confirmButton.primary:hover {background-color: var(--Green-100);}
+
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
