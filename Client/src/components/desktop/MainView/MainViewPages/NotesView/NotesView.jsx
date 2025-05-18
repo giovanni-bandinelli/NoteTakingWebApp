@@ -71,9 +71,28 @@ export default function NotesView({ currentView }) {
     setSelectedNote(newNote);
   }
 
-  async function handleCancelEdit() {
-    await loadNotesAndResetSelection();
+  function handleCancelEdit() {
+    if (selectedNote?.isNew) {
+      setSelectedNote(
+        {
+          id: 'temp-id',
+          title: '',
+          date: 'Not yet saved',
+          tags: [],
+          content: '',
+          archived: false,
+          isNew: true,
+        });
+    } else {
+      const note = notes.find(n => n.id === selectedNote.id);
+      if (note) {
+        setSelectedNote({ ...note, isNew: false });
+      } else {
+        setSelectedNote(null);
+      }
+    }
   }
+
 
   async function handleSaveNote() {
     try {
