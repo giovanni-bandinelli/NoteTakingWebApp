@@ -1,7 +1,7 @@
 const API_URL = `${import.meta.env.VITE_API_URL}`;
 
 // Helper: fetch with auth
-async function authFetch(url, options = {}, token) {
+async function authFetch(url, options = {}, token = localStorage.getItem('authToken')) {
   const res = await fetch(url, {
     ...options,
     headers: {
