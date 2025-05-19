@@ -10,28 +10,15 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-const allowedOrigins = [
-  'http://localhost:5173',
-  'https://note-taking-web-2nd1wpzjf-giovannis-projects-5124523b.vercel.app',
-];
-
 app.use(cors({
-  origin: (origin, callback) => {
-    
-    if (!origin) return callback(null, true);
-    if (allowedOrigins.includes(origin)) {
-      return callback(null, true);
-    }
-    return callback(new Error('Not allowed by CORS :('));
-  },
-  credentials: true,
+    origin: 'https://note-taking-web-2nd1wpzjf-giovannis-projects-5124523b.vercel.app',
 }));
 
 app.use(express.json());
 
 app.use('/auth', authRoutes);
 app.use('/notes',notesRoutes);
-app.use('/settings',userRoutes);  //router.get('/font', verifyToken, getFont);   API CLIENT (URL string is correct) authFetch(`${API_URL}/settings/font`, {}, token);
+app.use('/settings',userRoutes);  
 
 app.get('/test', (req, res) => {
     res.send('Backend OK');
