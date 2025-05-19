@@ -1,5 +1,5 @@
 /*My probably ugly solution to Desktop layout having 2 sibiling components 
-(NavSideBar and  NotesView's NoteEditor &  NoteActions) needing to update 
+(NavSidebar and  NotesView's NoteEditor &  NoteActions) needing to update 
 the tags list
 */
 

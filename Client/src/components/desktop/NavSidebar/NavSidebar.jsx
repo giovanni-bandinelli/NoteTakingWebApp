@@ -2,11 +2,11 @@ import { AppLogo, HomeIcon, ArchiveIcon } from '../../icons';
 import NavItem from '../../NavItem/NavItem';
 import TagNavItem from '../../NavItem/TagNavItem';
 
-import styles from './NavSideBar.module.css';
+import styles from './NavSidebar.module.css';
 import { useMainView } from '../../../context/MainViewContext';
 import { useTags } from '../../../context/TagContext';
 
-export default function NavSideBar({ className }) {
+export default function NavSidebar({ className }) {
     const { setCurrentView, currentView } = useMainView();
     const { tags } = useTags(); 
 
@@ -19,7 +19,7 @@ export default function NavSideBar({ className }) {
     };
 
     return (
-        <nav className={`${styles.NavSideBar} ${className || ''}`}> 
+        <nav className={`${styles.NavSidebar} ${className || ''}`}> 
             <div><AppLogo /></div>
             <ul>
                 <NavItem 
