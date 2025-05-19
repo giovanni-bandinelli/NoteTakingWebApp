@@ -10,7 +10,7 @@ import { useAuth } from './AuthContext';
 const TagContext = createContext();
 
 export function TagProvider({ children }) {
-  const { token } = useAuth();
+  const { token } = useAuth() || localStorage.getItem('authToken');;
   const [tags, setTags] = useState([]);
 
   const loadTags = async () => {
