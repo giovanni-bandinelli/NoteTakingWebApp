@@ -7,18 +7,18 @@ export function verifyToken(req, res, next) {
     console.log('Token received:', token); // Log received token
     
     if (!token) {
-        console.log('❌ No token found');
+        console.log('No token found');
         return res.status(403).json({ message: 'Token is missing' });
     }
 
     jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
         if (err) {
-            console.log('❌ Invalid or expired token:', err.message);
+            console.log('Invalid or expired token:', err.message);
             return res.status(403).json({ message: 'Invalid or expired token' });
         }
 
-        console.log('✅ Token verified for user:', decoded.email);
-        req.email = decoded.email; // Store email for route access <--I don't remember why i added this
+        console.log('Token verified for user:', decoded.email);
+        req.email = decoded.email; // Store email for route access <--I don't remember why i added this :P
         next();
     });
 }

@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { FontSansSerifIcon, FontSerifIcon, FontMonoSpaceIcon } from '../../../../icons';
 import RadioOption from '../../../../RadioOption/RadioOption';
 import { useSettings } from '../../../../../context/SettingsContext';
+import { useToast } from '../../../../../context/ToastContext';
+import { updateFontAPI } from '../../../../../api/settings.api';
 import styles from './FontSettings.module.css';
 
 async function updateFont(newFont) {
@@ -12,12 +14,19 @@ async function updateFont(newFont) {
 export default function FontSettings() {
     const { font, setFont } = useSettings(); 
     const [selectedFont, setSelectedFont] = useState(font); 
+    const token = localStorage.getItem('authToken');
+    const { showToast } = useToast();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log("Changing font:", selectedFont);
-        await updateFont(selectedFont); 
-        setFont(selectedFont); 
+        try {
+            await updateFontAPI(token, selectedFont);
+            setFont(selectedFont);
+            showToast({ type: 'success', message: 'Font updated successfully!' });
+        } catch (err) {
+            console.log(err);
+            showToast({ type: 'error', message: 'Failed to update font.' });
+        }
     };
 
     return (

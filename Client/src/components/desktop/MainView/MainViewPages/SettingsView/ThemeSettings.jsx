@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { SunIcon, MoonIcon, SystemTheme } from '../../../../icons';
 import RadioOption from '../../../../RadioOption/RadioOption';
 import { useSettings } from '../../../../../context/SettingsContext';
+import { useToast } from '../../../../../context/ToastContext';
+import {updateThemeAPI} from '../../../../../api/settings.api';
 import styles from './ThemeSettings.module.css';
 
 async function updateSettings(newTheme) {
@@ -12,12 +14,18 @@ async function updateSettings(newTheme) {
 export default function ThemeSettings() {
     const { theme, setTheme } = useSettings(); 
     const [selectedTheme, setSelectedTheme] = useState(theme);
+    const token = localStorage.getItem('authToken');
+    const { showToast } = useToast();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log("Submitting theme:", selectedTheme);
-        await updateSettings(selectedTheme); 
-        setTheme(selectedTheme); 
+        try {
+            await updateThemeAPI(token, selectedTheme);
+            setTheme(selectedTheme);
+            showToast({ type: 'success', message: 'Theme updated successfully!' });
+        } catch (err) {
+            showToast({ type: 'error', message: 'Failed to update theme.' });
+        }
     };
 
     return (

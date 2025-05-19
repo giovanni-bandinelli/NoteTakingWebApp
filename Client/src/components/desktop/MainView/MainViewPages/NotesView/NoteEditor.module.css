@@ -7,6 +7,8 @@
     gap: var(--Spacing-200);
 }
 
+.noteTitleInput{width:100%}
+
 .noteTitleInput::placeholder{
     color:var(--text-color-main);
 }

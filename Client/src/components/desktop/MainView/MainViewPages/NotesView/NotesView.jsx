@@ -16,6 +16,7 @@ import {
 
 import { useAuth } from '../../../../../context/AuthContext';
 import { useTags } from '../../../../../context/TagContext';
+import { useToast } from '../../../../../context/ToastContext';
 
 export default function NotesView({ currentView }) {
   const [notes, setNotes] = useState([]);
@@ -25,6 +26,7 @@ export default function NotesView({ currentView }) {
 
   const { token } = useAuth();
   const { reloadTags } = useTags();
+  const { showToast } = useToast();
 
   function formatDate(dateStr) {
     const date = new Date(dateStr);
@@ -98,24 +100,30 @@ export default function NotesView({ currentView }) {
     try {
       if (selectedNote.id === 'temp-id') {
         await createNoteAPI(token, selectedNote);
+        showToast({ type: 'success', message: 'Note created successfully!' });
       } else {
         await updateNoteAPI(token, selectedNote);
+        showToast({ type: 'success', message: 'Note updated successfully!' });
       }
       await loadNotesAndResetSelection();
       await reloadTags();
     } catch (err) {
       console.error('Failed to save note:', err);
+      showToast({ type: 'error', message: 'Failed to save note.' });
     }
   }
+
 
   async function handleConfirmArchive() {
     if (!selectedNote) return;
     try {
       await toggleNoteStatusAPI(token, selectedNote);
+      showToast({type: 'success', message: selectedNote.archived ? 'Note restored!' : 'Note archived!'});
       await loadNotesAndResetSelection();
       setShowArchiveModal(false);
     } catch (err) {
       console.error('Failed to archive note:', err);
+      showToast({ type: 'error', message: 'Failed to change archive status.'});
     }
   }
 
@@ -123,11 +131,13 @@ export default function NotesView({ currentView }) {
     if (!selectedNote) return;
     try {
       await deleteNoteAPI(token, selectedNote.id);
+      showToast({type: 'success', message: 'Note permanently deleted.'});
       await loadNotesAndResetSelection();
       await reloadTags();
       setShowDeleteModal(false);
     } catch (err) {
       console.error('Failed to delete note:', err);
+      showToast({type: 'error', message: 'Failed to delete note'});
     }
   }
 
@@ -149,10 +159,10 @@ export default function NotesView({ currentView }) {
           onCancelEdit={handleCancelEdit}
         />
       ) : (
-        <section className="noteContent"><p>No note selected or available.</p></section>
+        <section className="noteContent"><p></p></section>
       )}
 
-      {selectedNote && (
+      {selectedNote && selectedNote.id !== 'temp-id' &&(
         <>
           <NoteActions
             currentView={currentView}

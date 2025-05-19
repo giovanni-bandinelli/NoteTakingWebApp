@@ -1,6 +1,7 @@
 
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useToast } from '../../context/ToastContext.jsx';
 
 import sharedStyles from '../../styles/AuthLayout.module.css';
 import { AppLogo, InfoIcon} from '../../components/icons';
@@ -10,12 +11,13 @@ export default function ForgottenPasswordPage() {
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
   const navigate = useNavigate();
+  const { showToast } = useToast();
 
   async function handleSubmit(e){
     e.preventDefault();
     try {
       await sendRecoveryEmail(email);
-      setMessage('If the email exists, a password reset link has been sent.');
+      showToast({type:'success', message:'If the email exists, a password reset link has been sent.'});
       navigate('/');  // Redirect user to login page (or stay on this page based on your UX)
     } catch (error) {
       setMessage('An error occurred. Please try again.');
@@ -49,11 +51,11 @@ export default function ForgottenPasswordPage() {
                 />
             </div>
 
-            <button type="submit" className={sharedStyles.submitButton}>
+            <button type="submit" className={`blueButton ${sharedStyles.submitButton}`}>
                 <span>Send Reset Link</span>
             </button>
         </form>
-        {message && <p>{message}</p>}
+        {message && <p className={sharedStyles.errorMessage}><InfoIcon/>{message}</p>}
       </div>
     </div>)
 }

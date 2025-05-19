@@ -73,28 +73,57 @@ function OAuthButtons() {
 function FormSection({ isLogin, setIsAuthenticated }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [formError, setFormError] = useState('');
   const navigate = useNavigate();
 
-  async function onSubmit(event){
-    event.preventDefault();
-    try{
-      let authToken;
-      if (isLogin) {
-        authToken = await loginAPI(email,password);
-      } else {
-        authToken = await registerAPI(email, password);
-      }
-      localStorage.setItem('authToken', authToken);
-      setIsAuthenticated(true);
-      navigate('/');
-    }catch (err){
-      console.error(err);
+async function onSubmit(event) {
+  event.preventDefault();
+
+  setFormError('');
+
+  // Basic client-side validation (for register)
+  if (!isLogin) {
+    if (!email.includes('@')) {
+      setFormError("Please enter a valid email address.");
+      return;
     }
-  };
+    if (password.length < 8) {
+      setFormError("Password must be at least 8 characters.");
+      return;
+    }
+  }
+
+  try {
+    let authToken;
+
+    if (isLogin) {
+      authToken = await loginAPI(email, password);
+    } else {
+      authToken = await registerAPI(email, password);
+    }
+    localStorage.setItem('authToken', authToken);
+    setIsAuthenticated(true);
+    navigate('/');
+  } catch (err) {
+    console.error(err);
+    // Parse known errors
+    const message = err.message || '';
+    if (message.includes('401') || message.toLowerCase().includes('unauthorized')) {
+      setFormError("Invalid credentials.");
+    } else if (message.includes('already registered')) {
+      setFormError("Email is already in use.");
+    } else {
+      setFormError("Something went wrong. Please try again.");
+    }
+  }
+}
+
 
   return (
     <form onSubmit={onSubmit} className={sharedStyles.form}>
-
+      {formError && (
+        <p className={sharedStyles.errorMessage}><InfoIcon/>{formError}</p>
+      )}
       <div className={sharedStyles.formGroup}>
         <label className="text-preset-4">Email Address</label>
         <input

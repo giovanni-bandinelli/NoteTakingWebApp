@@ -3,24 +3,41 @@ import PasswordInput from '../../../../PasswordInput/PasswordInput';
 import { changePasswordAPI } from '../../../../../api/auth.api';
 import styles from './ChangePassword.module.css';
 import { InfoIcon } from '../../../../icons';
-
+import { useToast } from '../../../../../context/ToastContext';
 export default function ChangePassword() {
     const [currentPassword, setCurrentPassword] = useState('');
     const [newPassword, setNewPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
+    const [formError, setFormError] = useState('');
+
+    const {showToast} = useToast()
 
     async function handleSubmit(e) {
         e.preventDefault();
 
-        if (confirmPassword !== newPassword) {
-            console.log("Password Confirmation doesn't match");
+        if (newPassword.length < 8) {
+            setFormError('New password must be at least 8 characters long.');
+            return;
         }
+        if (newPassword === currentPassword) {
+            setFormError("New password can't be the same as the old one.");
+            return;
+        }
+        if (confirmPassword !== newPassword) {
+            setFormError("Passwords don't match.");
+            return;
+        }
+
         const token = localStorage.getItem('authToken');
         try {
             await changePasswordAPI(token, currentPassword, newPassword);
             console.log("Password changed successfully!");
+            showToast({ type: 'success', message: 'Password changed successfully!' });
+            setFormError('');
         } catch (err) {
+            const isWrongOldPassword = err.message.includes('401');
             console.error("Error changing password:", err);
+            showToast({ type: 'error', message: isWrongOldPassword ? 'Old password is incorrect.' :'Something went wrong. try again' });
         }
     }
 
@@ -29,7 +46,11 @@ export default function ChangePassword() {
             <div className="titleWrapper">
                 <h2 className="text-preset-1">Change Password</h2>
             </div>
-
+            {formError && (
+            <div className={styles.errorMessage}>
+                <p className="text-preset-5" style={{ color: 'var(--Red-500)' }}><span className={styles.infoIcon}><InfoIcon/></span>{formError}</p>
+            </div>
+            )}
             <div className={styles.passwordInputsWrapper}>
                 <label> 
                     <h3 className='text-preset-4'>Old Password</h3>

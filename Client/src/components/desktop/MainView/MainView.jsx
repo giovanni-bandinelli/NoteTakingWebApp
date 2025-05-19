@@ -17,11 +17,11 @@ export default function MainView() {
 
         if (currentView.type === 'all-notes' || currentView.type === 'archived' || currentView.type === 'tag' || currentView.type === 'search') {
             return (
-                <NotesView currentView={currentView}/> //They all share layout and have minor differences...
+                <NotesView currentView={currentView}/> 
             );
         }
 
-        return <p>Something went wrong, please try reloading the page.</p>; // 99% this should can't ever happen
+        return <p>Something went wrong, please try reloading the page.</p>; // 99% this should can't ever happen?
     }
 
     return (

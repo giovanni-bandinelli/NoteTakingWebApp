@@ -1,8 +1,9 @@
 .desktopContainer{
   height: 100vh;
+  width: 100vw;
   min-height: 0;
   display: grid;
-  grid-template-columns: 275px 1fr;
+  grid-template-columns: clamp(15vh, 20vw, 275px) 1fr;
   grid-template-rows: auto 1fr;
 
 }

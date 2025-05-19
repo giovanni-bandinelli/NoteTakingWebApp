@@ -41,7 +41,7 @@ export async function getNotesAPI(token, currentView) {
   return await authFetch(`${API_URL}/notes?${params.toString()}`, {}, token);
 }
 
-// Create a new note
+
 export async function createNoteAPI(token, note) {
   const { title, content, tags, archived } = note;
   return await authFetch(`${API_URL}/notes`, {
@@ -65,7 +65,6 @@ export async function toggleNoteStatusAPI(token, note) {
   return await updateNoteAPI(token, updated);
 }
 
-// Delete a note
 export async function deleteNoteAPI(token, noteId) {
   return await authFetch(`${API_URL}/notes/${noteId}`, {
     method: 'DELETE',

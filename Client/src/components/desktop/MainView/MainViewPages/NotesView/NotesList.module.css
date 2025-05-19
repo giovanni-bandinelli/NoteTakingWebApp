@@ -23,8 +23,6 @@
     min-height: 0;   /* Prevent overflow issues */
     display: flex;
     flex-direction: column;
-
-    gap: var(--Spacing-150);
 }
 
 .createNoteButton{
@@ -39,7 +37,13 @@
     bottom: 1px;
 }
 
+.notesListEmpty{
+    border: 1px solid var(--border-color);
+    border-radius: var(--Radius-8);
+    background-color: var(--background-color-secondary);
+    padding: var(--Spacing-100);
 
+}
 
 
 

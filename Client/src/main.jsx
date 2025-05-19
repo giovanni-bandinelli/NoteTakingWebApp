@@ -5,6 +5,7 @@ import App from './App.jsx'
 import { AuthProvider } from './context/AuthContext';
 import { SettingsProvider } from './context/SettingsContext.jsx';
 import { TagProvider } from './context/TagContext';
+import { ToastProvider } from './context/ToastContext.jsx';
 
 const CLIENT_ID = import.meta.env.VITE_GOOGLE_CLIENT_ID
 
@@ -14,7 +15,9 @@ createRoot(document.getElementById('root')).render(
       <AuthProvider>
         <SettingsProvider>
           <TagProvider>
-            <App /> 
+            <ToastProvider>
+              <App /> 
+            </ToastProvider>
           </TagProvider>
         </SettingsProvider>
       </AuthProvider>

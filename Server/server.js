@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 
 import authRoutes from './routes/auth.routes.js';
 import notesRoutes from './routes/notes.routes.js';
+import userRoutes from './routes/user.routes.js';
 
 dotenv.config();
 const app = express();
@@ -16,7 +17,8 @@ app.use(cors({
 app.use(express.json());
 
 app.use('/auth', authRoutes);
-app.use('/notes',notesRoutes); //and then -> router.get('/', verifyToken, getNotes);
+app.use('/notes',notesRoutes);
+app.use('/settings',userRoutes);  //router.get('/font', verifyToken, getFont);   API CLIENT (URL string is correct) authFetch(`${API_URL}/settings/font`, {}, token);
 
 app.get('/test', (req, res) => {
     res.send('Backend OK');

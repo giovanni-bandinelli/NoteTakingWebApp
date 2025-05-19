@@ -1,9 +1,10 @@
-.NoteItem{border-top: 1px solid var(--border-color); width: 100%;padding: var(--Spacing-100);}
+.NoteItem{border-top: 1px solid var(--border-color); width: 100%; padding: var(--Spacing-025);display: flex;}
 .noteButton{
     display: flex;
     flex-direction: column;
     gap: var(--Spacing-150);
-    width: inherit;
+    width: calc(100% - var(--Spacing-250));
+    padding: var(--Spacing-150);
 }
 
 .tagsList{
@@ -20,4 +21,7 @@
     padding: var(--Spacing-025) var(--Spacing-075);
 }
 
-
+.active{
+    background-color: var(--background-color-secondary);
+    border-radius: var(--Radius-6);
+}
