@@ -11,7 +11,7 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 app.use(cors({
-    origin: 'note-taking-web-app-eight-green.vercel.app',
+    origin: 'https://note-taking-web-app-eight-green.vercel.app',
 }));
 
 app.use(express.json());
