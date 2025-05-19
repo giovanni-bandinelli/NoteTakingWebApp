@@ -11,7 +11,7 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 app.use(cors({
-    origin: 'https://note-taking-web-74qtbivgt-giovannis-projects-5124523b.vercel.app',
+    origin: 'note-taking-web-app-eight-green.vercel.app',
 }));
 
 app.use(express.json());
