@@ -24,7 +24,9 @@ export default function NotesView({ currentView }) {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [showArchiveModal, setShowArchiveModal] = useState(false);
 
-  const { token } = useAuth() || localStorage.getItem('authToken');
+  const auth = useAuth();
+  const token = auth?.token || localStorage.getItem('authToken');
+
   const { reloadTags } = useTags();
   const { showToast } = useToast();
 
