@@ -19,3 +19,9 @@
     align-items: center;
     white-space: nowrap;
 }
+
+@media (800px < width < 1040px){ /* Couldn't find any good looking decent resizing that worked for both icon & text in this range*/
+    .actionButton > svg {
+        display: none;
+    }
+}

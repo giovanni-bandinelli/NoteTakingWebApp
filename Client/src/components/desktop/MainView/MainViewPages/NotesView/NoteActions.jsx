@@ -10,11 +10,11 @@ export default function NoteActions({ currentView, onRequestDelete, onRequestArc
         </button>
       ) : (
         <button className={styles.actionButton} onClick={onRequestArchive}>
-          <ArchiveIcon className={styles.icon}/><span className='text-preset-4'>Archive Note</span>
+          <ArchiveIcon /><span className='text-preset-4'>Archive Note</span>
         </button>
       )}
       <button className={styles.actionButton} onClick={onRequestDelete}>
-        <DeleteIcon className={styles.icon}/><span className='text-preset-4'>Delete Note</span>
+        <DeleteIcon /><span className='text-preset-4'>Delete Note</span>
       </button>
     </aside>
   );
