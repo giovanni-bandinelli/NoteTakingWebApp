@@ -3,7 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 
 import { AppLogo, InfoIcon} from '../../components/icons';
 import PasswordInput from '../../components/PasswordInput/PasswordInput';
-import { resetPasswordAPI} from '../../api/auth.api.js'//to define
+import { resetPasswordAPI} from '../../api/auth.api.js'
 
 import styles from '../../styles/AuthLayout.module.css';
 export default function ResetPasswordPage() {
@@ -85,9 +85,9 @@ export default function ResetPasswordPage() {
                         <h1 className="text-preset-1">
                             Invalid or Expired Recovery Link
                         </h1>
-                        <p className="text-preset-5">
-                            Please wait
-                        </p>
+                        <button className={styles.goBack} onClick={navigate("/")}>
+                            <span className="text-preset-5">Go back to login</span>
+                        </button>
                     </header>
                 </div>
             </div>

@@ -102,7 +102,7 @@ export async function changePassword(req,res) {
         console.log(`updating password for ${email} from " ${currentPassword} " to " ${newPassword} "`);
         res.status(200).json({ message: 'Password has been updated!' });
     } catch (error) {
-        console.error("Server Error:", error); // Log any server errors
+        console.error("Server Error:", error); 
         res.status(500).json({ message: 'Server Error' });
     }
 }

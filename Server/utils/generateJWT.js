@@ -5,5 +5,5 @@ export function generateJwtToken(email){
 };
 
 export function generateResetToken(email) {
-    return jwt.sign({ email } , process.env.JWT_SECRET, { expiresIn: '3h' });
+    return jwt.sign({ email } , process.env.JWT_SECRET, { expiresIn: '12h' });
   }
