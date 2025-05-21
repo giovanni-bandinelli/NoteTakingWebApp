@@ -169,7 +169,7 @@ export default function NotesView({ currentView }) {
           <NoteActions
             currentView={currentView}
             onRequestDelete={() => setShowDeleteModal(true)}
-            onRequestArchive={() => setShowArchiveModal(true)}
+            onRequestArchive={() => {currentView.type == "archived" ? handleConfirmArchive() : setShowArchiveModal(true)}}
             isNew={selectedNote.isNew}
           />
 
