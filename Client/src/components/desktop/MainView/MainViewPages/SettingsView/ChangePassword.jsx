@@ -34,6 +34,7 @@ export default function ChangePassword() {
             showToast({ type: 'success', message: 'Password changed successfully!' });
             setFormError('');
         } catch (err) {
+            if (err.message.includes('Too many')) {showToast({ type: 'error', message: err.message })};
             const isWrongOldPassword = err.message.includes('401');
             showToast({ type: 'error', message: isWrongOldPassword ? 'Old password is incorrect.' :'Something went wrong. try again' });
         }

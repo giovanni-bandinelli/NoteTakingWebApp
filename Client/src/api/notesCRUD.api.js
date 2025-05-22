@@ -10,7 +10,10 @@ async function authFetch(url, options = {}, token) {
       ...(options.headers || {}),
     },
   });
-  if (!res.ok) throw new Error(`Request failed: ${res.statusText}`);
+  if (!res.ok) {
+    const message = data.message || `Request failed: ${res.statusText}`;
+    throw new Error(message);
+  }
   return res.status === 204 ? null : res.json();
 }
 

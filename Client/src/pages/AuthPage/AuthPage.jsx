@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useGoogleLogin } from '@react-oauth/google';
 
 import { AuthContext } from '../../context/AuthContext';
+import { ToastProvider } from '../../context/ToastContext.jsx';
 import { loginAPI, registerAPI, googleLoginAPI} from '../../api/auth.api.js'
 
 import { AppLogo, GoogleIcon, InfoIcon } from '../../components/icons';
@@ -104,8 +105,11 @@ async function onSubmit(event) {
     navigate('/');
   } catch (err) {
     console.error(err);
+    if (err.message.includes('Too many')) {showToast({ type: 'error', message: err.message });
+  }
     // Parse known errors
     const message = err.message || '';
+    if(res.status === 429)
     if (message.includes('Invalid credentials') || message.toLowerCase().includes('unauthorized')) {
       setFormError("Invalid credentials.");
     } else if (message.includes('already registered')) {

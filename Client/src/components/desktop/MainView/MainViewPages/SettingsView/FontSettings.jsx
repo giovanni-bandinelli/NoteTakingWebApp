@@ -19,6 +19,7 @@ export default function FontSettings() {
             setFont(selectedFont);
             showToast({ type: 'success', message: 'Font updated successfully!' });
         } catch (err) {
+            if (err.message.includes('Too many')) {showToast({ type: 'error', message: err.message })};
             showToast({ type: 'error', message: 'Failed to update font.' });
         }
     };

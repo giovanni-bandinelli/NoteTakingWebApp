@@ -20,6 +20,7 @@ export default function ForgottenPasswordPage() {
       showToast({type:'success', message:'A password reset link has been sent to the submitted email.'});
       navigate('/');
     } catch (error) {
+      if (err.message.includes('Too many')) {showToast({ type: 'error', message: err.message })};
       setMessage('An error occurred. Please try again.');
       console.error(error);
     }

@@ -110,6 +110,7 @@ export default function NotesView({ currentView }) {
       await loadNotesAndResetSelection();
       await reloadTags();
     } catch (err) {
+      if (err.message.includes('Too many')) {showToast({ type: 'error', message: err.message })};
       console.error('Failed to save note:', err);
       showToast({ type: 'error', message: 'Failed to save note.' });
     }
@@ -124,6 +125,7 @@ export default function NotesView({ currentView }) {
       await loadNotesAndResetSelection();
       setShowArchiveModal(false);
     } catch (err) {
+      if (err.message.includes('Too many')) {showToast({ type: 'error', message: err.message })};
       console.error('Failed to archive note:', err);
       showToast({ type: 'error', message: 'Failed to change archive status.'});
     }
@@ -138,6 +140,7 @@ export default function NotesView({ currentView }) {
       await reloadTags();
       setShowDeleteModal(false);
     } catch (err) {
+      if (err.message.includes('Too many')) {showToast({ type: 'error', message: err.message })};
       console.error('Failed to delete note:', err);
       showToast({type: 'error', message: 'Failed to delete note'});
     }

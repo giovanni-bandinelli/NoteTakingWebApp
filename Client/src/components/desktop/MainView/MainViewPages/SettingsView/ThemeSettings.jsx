@@ -19,6 +19,7 @@ export default function ThemeSettings() {
             setTheme(selectedTheme);
             showToast({ type: 'success', message: 'Theme updated successfully!' });
         } catch (err) {
+            if (err.message.includes('Too many')) {showToast({ type: 'error', message: err.message })};
             showToast({ type: 'error', message: 'Failed to update theme.' });
         }
     };

@@ -4,16 +4,27 @@ import { verifyToken } from '../middleware/auth.middleware.js';
 
 const router = express.Router();
 
-router.post('/register', registerUser);
-router.post('/login', loginUser);
-router.post('/google-login', googleAuth);
-router.post('/forgot-password', forgotPassword);
+const authLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 100,
+  handler: (req, res) => {
+    const retryAfter = Math.ceil((req.rateLimit.resetTime - new Date()) / 1000);
+    res.status(429).json({ message: `Too many requests, try again in ${retryAfter} seconds.` });
+  }
+});
+
+router.post('/register', authLimiter, registerUser);
+router.post('/login', authLimiter, loginUser);
+router.post('/google-login', authLimiter, googleAuth);
+router.post('/forgot-password', authLimiter, forgotPassword);
+router.post('/reset-password', authLimiter, resetPassword);
+router.post('/change-password', authLimiter, changePassword);
+
 router.get('/verify-reset-token', verifyResetToken);
-router.post('/reset-password', resetPassword);
-router.post('/change-password', changePassword);
 // Root webapp route protected with JWT
 router.get('/verify', verifyToken, (req, res) => {
-    res.json({ message: 'Token is valid', email: req.email });
+  res.json({ message: 'Token is valid', email: req.email });
 });
 
 export default router;
+

@@ -1,18 +1,22 @@
 const API_URL = `${import.meta.env.VITE_API_URL}`;
 
-export async function loginAPI(email, password){
+export async function loginAPI(email, password) {
   const res = await fetch(`${API_URL}/auth/login`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ email, password }),
   });
-  if (!res.ok){
-    const errorData = await res.json().catch(() => ({ message: 'Unknown error' }));
-    throw new Error(`Login failed: ${errorData.message || 'No error message'}`);
+
+  const data = await res.json().catch(() => ({}));
+
+  if (!res.ok) {
+    const message = data.message || 'Login failed';
+    throw new Error(message);
   }
-  const data = await res.json();
+
   return data.token;
-};
+}
+
 
 
 export async function registerAPI (email, password){
@@ -21,7 +25,10 @@ export async function registerAPI (email, password){
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ email, password }),
   });
-  if (!res.ok) throw new Error('Registration failed');
+  if (!res.ok) {
+    const message = data.message || 'Registration failed';
+    throw new Error(message);
+  }
   const data = await res.json();
   return data.token;
 };
@@ -32,7 +39,10 @@ export async function googleLoginAPI(googleToken){
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ token: googleToken }),
   });
-  if (!res.ok) throw new Error('Google login failed');
+  if (!res.ok) {
+    const message = data.message || 'Google Login failed';
+    throw new Error(message);
+  }
   const data = await res.json();
   return data.token;
 };
@@ -45,8 +55,10 @@ export async function sendRecoveryEmail(email) {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ email }),
   });
-
-  if (!res.ok) throw new Error('Password reset request failed');
+  if (!res.ok) {
+    const message = data.message || 'Password reset request failed';
+    throw new Error(message);
+  }
   return res.json();
 }
 
@@ -57,8 +69,10 @@ export async function resetPasswordAPI(linkToken,newPassword) {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ linkToken, newPassword }),
   });
-
-  if (!res.ok) throw new Error('Password reset failed');
+  if (!res.ok) {
+    const message = data.message || 'Password reset request failed';
+    throw new Error(message);
+  }
   return res.json();
 }
 
@@ -72,8 +86,8 @@ export async function changePasswordAPI(authtoken,currentPassword,newPassword) {
   });
 
   if (!res.ok) {
-    const errorBody = await res.json();
-    throw new Error(`Password change failed: ${res.status} - ${errorBody.message}`);
+    const message = data.message || 'Password change request failed';
+    throw new Error(message);
   }
 
   return res.json();
