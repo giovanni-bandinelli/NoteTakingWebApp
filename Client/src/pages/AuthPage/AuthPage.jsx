@@ -106,7 +106,7 @@ async function onSubmit(event) {
     console.error(err);
     // Parse known errors
     const message = err.message || '';
-    if (message.includes('401') || message.toLowerCase().includes('unauthorized')) {
+    if (message.includes('Invalid credentials') || message.toLowerCase().includes('unauthorized')) {
       setFormError("Invalid credentials.");
     } else if (message.includes('already registered')) {
       setFormError("Email is already in use.");
