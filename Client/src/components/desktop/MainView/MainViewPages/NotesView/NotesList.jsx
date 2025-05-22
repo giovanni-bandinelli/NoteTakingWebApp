@@ -1,4 +1,3 @@
-// NotesList.jsx
 import NoteItem from '../../../../NoteItem/NoteItem';
 import styles from './NotesList.module.css'; 
 

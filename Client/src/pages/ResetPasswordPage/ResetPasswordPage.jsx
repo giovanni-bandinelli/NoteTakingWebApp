@@ -16,12 +16,11 @@ export default function ResetPasswordPage() {
     const API_URL = `${import.meta.env.VITE_API_URL}`;
 
     const linkToken = (new URLSearchParams(location.search)).get("token");
-    console.log(linkToken);
     const navigate = useNavigate();
 
     useEffect(()=>{
         if (!linkToken) {
-            setIsValid(false); // No token found
+            setIsValid(false);
             return;
         }
         async function verifyToken() {

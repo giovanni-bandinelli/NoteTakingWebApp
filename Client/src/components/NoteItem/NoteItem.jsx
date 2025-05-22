@@ -1,4 +1,3 @@
-// NoteItem.jsx
 import styles from './NoteItem.module.css';
 
 export default function NoteItem({ title, tags, date, onClick, isActive }) {

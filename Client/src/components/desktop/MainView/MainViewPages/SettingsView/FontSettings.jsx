@@ -6,11 +6,6 @@ import { useToast } from '../../../../../context/ToastContext';
 import { updateFontAPI } from '../../../../../api/settings.api';
 import styles from './FontSettings.module.css';
 
-async function updateFont(newFont) {
-    console.log("Updating font in DB:", newFont);
-    return new Promise((resolve) => setTimeout(resolve, 1000)); 
-}
-
 export default function FontSettings() {
     const { font, setFont } = useSettings(); 
     const [selectedFont, setSelectedFont] = useState(font); 
@@ -24,7 +19,6 @@ export default function FontSettings() {
             setFont(selectedFont);
             showToast({ type: 'success', message: 'Font updated successfully!' });
         } catch (err) {
-            console.log(err);
             showToast({ type: 'error', message: 'Failed to update font.' });
         }
     };

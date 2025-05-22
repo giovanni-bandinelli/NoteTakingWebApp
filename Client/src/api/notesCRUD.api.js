@@ -16,8 +16,6 @@ async function authFetch(url, options = {}, token) {
 
 
 export async function getTagsAPI(token) {
-  console.log(`loading user's tags:${API_URL}/tags`);
-  
   return await authFetch(`${API_URL}/notes/tags`, {}, token);
 }
 
@@ -34,9 +32,6 @@ export async function getNotesAPI(token, currentView) {
   if (type === 'search' && searchQuery) {
     params.set('search', searchQuery);
   }
-  
-  console.log("currentView:", currentView, "\nparams:", params);
-  console.log(`launching api:${API_URL}/notes?${params.toString()}`);
   
   return await authFetch(`${API_URL}/notes?${params.toString()}`, {}, token);
 }

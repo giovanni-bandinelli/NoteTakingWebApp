@@ -12,7 +12,7 @@ import './styles/designTokens.css';
 import './styles/global.css';
 import './styles/customSettings.css';
 
-//#0E121B changed to currentColor for every svg to get dark/light options
+//#0E121B changed to currentColor for every svg in icons to get dark/light options.
 
 // PrivateRoute Component for Protected Routes
 

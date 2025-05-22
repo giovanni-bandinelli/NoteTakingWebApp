@@ -31,12 +31,10 @@ export default function ChangePassword() {
         const token = localStorage.getItem('authToken');
         try {
             await changePasswordAPI(token, currentPassword, newPassword);
-            console.log("Password changed successfully!");
             showToast({ type: 'success', message: 'Password changed successfully!' });
             setFormError('');
         } catch (err) {
             const isWrongOldPassword = err.message.includes('401');
-            console.error("Error changing password:", err);
             showToast({ type: 'error', message: isWrongOldPassword ? 'Old password is incorrect.' :'Something went wrong. try again' });
         }
     }
