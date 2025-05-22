@@ -2,12 +2,10 @@ import { createContext, useContext, useState, useEffect } from 'react';
 
 export const AuthContext = createContext(null);
 
-// Custom Hook to use AuthContext
 export function useAuth() {
     return useContext(AuthContext);
 }
 
-// AuthProvider Component
 export function AuthProvider({ children }) {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [token, setToken] = useState(localStorage.getItem('authToken'));
@@ -54,18 +52,17 @@ export function AuthProvider({ children }) {
             } else {
                 setIsAuthenticated(false);
                 localStorage.removeItem('authToken');
-                setToken(null); // clean up token on invalid
+                setToken(null);
             }
         } catch (err) {
-            console.error('Error verifying token:', err);
             setIsAuthenticated(false);
             localStorage.removeItem('authToken');
-            setToken(null); // clean up token on error too
+            setToken(null);
         }
     };
 
 
-    //to avoid having to expose "setToken" in the handleLogout function (occasional timing issue), should prob do this for all auth func? 
+    //helper function to avoid having to expose "setToken" in the handleLogout function (was giving occasional timing issue) 
     function logout() {
         localStorage.removeItem('authToken');
         setToken(null); 
@@ -81,5 +78,5 @@ export function AuthProvider({ children }) {
         }}>
             {children}
         </AuthContext.Provider>
-    );
+    );// token value exposed by auth provider usually doesnt end up working as expected :/
 }

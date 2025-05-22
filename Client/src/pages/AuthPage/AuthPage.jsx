@@ -34,17 +34,15 @@ function OAuthButtons() {
   const navigate = useNavigate();
   const { setIsAuthenticated } = useContext(AuthContext);
 
-  const googleLogin = useGoogleLogin({//99% sure something is off here but idk
+  const googleLogin = useGoogleLogin({
     onSuccess: async (response) => {
       try {
-        console.log("Google response:", response);
-        
-        const googleToken = response.access_token; // ✅ Correct way to get the token
+        const googleToken = response.access_token; 
         if (!googleToken) {
           throw new Error("No Google token received");
         }
     
-        const authToken = await googleLoginAPI(googleToken); // ✅ Use await
+        const authToken = await googleLoginAPI(googleToken); 
         localStorage.setItem('authToken', authToken);
         setIsAuthenticated(true);
         navigate("/"); 

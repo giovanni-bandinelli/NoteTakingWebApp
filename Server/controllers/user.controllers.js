@@ -1,10 +1,9 @@
-import pool from '../config/db.js';
+import { getFontByEmail, updateFontByEmail, getThemeByEmail, updateThemeByEmail } from '../models/user.model.js';
 
 export async function getFont(req, res) {
-  const { email } = req;
   try {
-    const { rows } = await pool.query('SELECT font FROM users WHERE email = $1', [email]);
-    res.json({ font: rows[0]?.font || 'sans-serif' });
+    const font = await getFontByEmail(req.email);
+    res.json({ font });
   } catch (err) {
     console.error('Error fetching font:', err);
     res.status(500).json({ message: 'Server error' });
@@ -12,10 +11,8 @@ export async function getFont(req, res) {
 }
 
 export async function updateFont(req, res) {
-  const { email } = req;
-  const { font } = req.body;
   try {
-    await pool.query('UPDATE users SET font = $1 WHERE email = $2', [font, email]);
+    await updateFontByEmail(req.email, req.body.font);
     res.status(200).json({ message: 'Font updated' });
   } catch (err) {
     console.error('Error updating font:', err);
@@ -24,11 +21,9 @@ export async function updateFont(req, res) {
 }
 
 export async function getTheme(req, res) {
-  console.log("req:",req)
-  const { email } = req;
   try {
-    const { rows } = await pool.query('SELECT theme FROM users WHERE email = $1', [email]);
-    res.json({ theme: rows[0]?.theme || 'system' });
+    const theme = await getThemeByEmail(req.email);
+    res.json({ theme });
   } catch (err) {
     console.error('Error fetching theme:', err);
     res.status(500).json({ message: 'Server error' });
@@ -36,10 +31,8 @@ export async function getTheme(req, res) {
 }
 
 export async function updateTheme(req, res) {
-  const email = req.email;
-  const { theme } = req.body;
   try {
-    await pool.query('UPDATE users SET theme = $1 WHERE email = $2', [theme, email]);
+    await updateThemeByEmail(req.email, req.body.theme);
     res.status(200).json({ message: 'Theme updated' });
   } catch (err) {
     console.error('Error updating theme:', err);

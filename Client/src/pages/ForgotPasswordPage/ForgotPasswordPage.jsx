@@ -5,7 +5,7 @@ import { useToast } from '../../context/ToastContext.jsx';
 
 import sharedStyles from '../../styles/AuthLayout.module.css';
 import { AppLogo, InfoIcon} from '../../components/icons';
-import { sendRecoveryEmail } from '../../api/auth.api.js'; // Make sure to implement this in your API file
+import { sendRecoveryEmail } from '../../api/auth.api.js'; 
 
 export default function ForgottenPasswordPage() {
   const [email, setEmail] = useState('');
@@ -17,8 +17,8 @@ export default function ForgottenPasswordPage() {
     e.preventDefault();
     try {
       await sendRecoveryEmail(email);
-      showToast({type:'success', message:'If the email exists, a password reset link has been sent.'});
-      navigate('/');  // Redirect user to login page (or stay on this page based on your UX)
+      showToast({type:'success', message:'A password reset link has been sent to the submitted email.'});
+      navigate('/');
     } catch (error) {
       setMessage('An error occurred. Please try again.');
       console.error(error);

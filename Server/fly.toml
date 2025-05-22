@@ -1,15 +1,20 @@
-# fly.toml app configuration file generated for notetakingwebapp on 2025-05-22T16:59:54Z
+
+# fly.toml app configuration file generated for note-taking-web-app on 2025-05-22T19:11:15+02:00
+
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = 'notetakingwebapp'
+
+app = 'note-taking-web-app'
+
 primary_region = 'fra'
 
 [build]
 
 [http_service]
-  internal_port = 3000
+
+  internal_port = 8080
   force_https = true
   auto_stop_machines = 'stop'
   auto_start_machines = true
@@ -17,7 +22,7 @@ primary_region = 'fra'
   processes = ['app']
 
 [[vm]]
-  memory = '1gb'
+  memory = '512mb'
   cpu_kind = 'shared'
   cpus = 1
-  memory_mb = 512
+

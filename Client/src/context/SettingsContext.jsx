@@ -11,7 +11,6 @@ export function SettingsProvider({ children }) {
 
     useEffect(() => {
         async function fetchSettings() {
-            console.log("Token in SettingsContext:", token);
 
             if (token) {
                 try {

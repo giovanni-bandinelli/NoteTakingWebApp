@@ -6,11 +6,6 @@ import { useToast } from '../../../../../context/ToastContext';
 import {updateThemeAPI} from '../../../../../api/settings.api';
 import styles from './ThemeSettings.module.css';
 
-async function updateSettings(newTheme) {
-    console.log("Updating theme in DB:", newTheme);
-    return new Promise((resolve) => setTimeout(resolve, 1000)); 
-}
-
 export default function ThemeSettings() {
     const { theme, setTheme } = useSettings(); 
     const [selectedTheme, setSelectedTheme] = useState(theme);

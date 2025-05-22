@@ -1,4 +1,3 @@
-// Toast.jsx
 import { CheckMarkIcon, XMarkIcon, CrossIcon } from '../icons';
 import styles from './Toast.module.css';
 

@@ -1,5 +1,5 @@
 import { TagIcon, ClockIcon, StatusIcon } from '../../../../icons';
-import styles from './NoteEditor.module.css'; // Maybe split or reuse styles.
+import styles from './NoteEditor.module.css'; 
 
 export default function NoteEditor({ selectedNote, setSelectedNote, onSaveNote, onCancelEdit }) {
     if (!selectedNote) {
