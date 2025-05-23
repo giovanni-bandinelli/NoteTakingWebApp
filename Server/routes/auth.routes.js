@@ -9,7 +9,9 @@ const authLimiter = rateLimit({
   windowMs: 10 * 1000,
   max: 2,
   keyGenerator: (req) => {
-    return req.headers['fly-client-ip'] || req.ip;
+    const ip = req.headers['fly-client-ip'] || req.ip;
+    console.log('\n\nRate limit key (IP):', ip,'\n\n');
+    return ip;
   },
   handler: (req, res) => {
     const retryAfter = Math.ceil((req.rateLimit.resetTime - new Date()) / 1000);
