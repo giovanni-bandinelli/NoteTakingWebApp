@@ -1,13 +1,8 @@
-
-
-
 export default function MobileLayout() {
   return (
-    <div className="mobile-container">
-
-      <h2>Whoops</h2>
-      <p>since this is a MVP project I decided to leave out the mobile & tablet layout, I know it would have added a lot to the level of "polishness" of the project but it's just react-queries/media-queries but lots of work. Right now I'd much prefer focusing on learning opportunities. If you want to properly try this website use a 1000 px width resolution :) </p>
-
+    <div className="mobile-container" style={{padding:"var(--Spacing-100)"}}>
+      <h2>Unsupported Device</h2>
+      <p>This MVP does not include a mobile or tablet layout. For the full experience, please use a device with a screen width of at least 1000px.</p>
     </div>
   );
 }
