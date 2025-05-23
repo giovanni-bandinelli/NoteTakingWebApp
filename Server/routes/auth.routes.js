@@ -10,7 +10,13 @@ const authLimiter = rateLimit({
   max: 2,
   keyGenerator: (req) => {
     const ip = req.headers['fly-client-ip'] || req.ip;
-    console.log('\n\nRate limit key (IP):', ip,'\n\n');
+    console.log('\n=== ALL client IP INFO ===');
+    console.log('req.ip:', req.ip);
+    console.log('fly-client-ip:', req.headers['fly-client-ip']);
+    console.log('x-forwarded-for:', req.headers['x-forwarded-for']);
+    console.log('x-real-ip:', req.headers['x-real-ip']);
+    console.log('cf-connecting-ip:', req.headers['cf-connecting-ip']);
+    console.log('==================\n')
     return ip;
   },
   handler: (req, res) => {
