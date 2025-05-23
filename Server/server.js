@@ -10,6 +10,8 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 8080;
 
+app.set('trust proxy', 1);
+
 const allowedOrigins = [
     process.env.CLIENT_URL_PROD,
     process.env.CLIENT_URL_DEV
@@ -25,6 +27,8 @@ app.use(cors({
 }));
 
 app.use(express.json());
+
+
 
 app.use('/auth', authRoutes);
 app.use('/notes', notesRoutes);

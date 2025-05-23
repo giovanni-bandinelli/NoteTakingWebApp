@@ -1,6 +1,7 @@
 import express from 'express';
 import { registerUser, loginUser, googleAuth, forgotPassword, verifyResetToken, resetPassword, changePassword } from '../controllers/auth.controllers.js';
 import { verifyToken } from '../middleware/auth.middleware.js';
+import rateLimit from 'express-rate-limit';
 
 const router = express.Router();
 
@@ -10,7 +11,10 @@ const authLimiter = rateLimit({
   handler: (req, res) => {
     const retryAfter = Math.ceil((req.rateLimit.resetTime - new Date()) / 1000);
     res.status(429).json({ message: `Too many requests, try again in ${retryAfter} seconds.` });
-  }}
+  },
+  standardHeaders: true,
+  legacyHeaders: false
+  } 
 );
 
 router.post('/register', authLimiter, registerUser);

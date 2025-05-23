@@ -6,12 +6,15 @@ import rateLimit from 'express-rate-limit';
 const router = express.Router();
 
 const spamActionLimiter = rateLimit({
-  windowMs: 60 * 1000,
-  max: 30,
+  windowMs: 10 * 1000,
+  max: 2,
   handler: (req, res) => {
-    res.status(429).json({ message: 'Too many actions, slow down.' });
-  }
-});
+    res.status(429).json({ message: `Too many requests, slow down.` });
+  },
+  standardHeaders: true,
+  legacyHeaders: false
+  } 
+);
 
 //feels overkill to make routes,controller etc for a single tag related function so i'm putting it here
 router.get('/tags', verifyToken, getTags);
