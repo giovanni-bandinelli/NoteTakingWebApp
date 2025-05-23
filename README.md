@@ -25,13 +25,15 @@ Showcase of a registered user logging in, changing settings, launching some note
 - **Auth**: Google OAuth 2.0, JWT
 - **Other**: CSS styling with CSS Modules only, using design token taken from the Figma Files
 
-## Limitations and cut out content
+## Limitations and cut out content due to time constraints/low or ROI
 
 - No mobile/tablet layout: MVP optimized for desktop only (≥1000px width).
 - No keyboard accessibility
 - No markdown/image support in notes
 
 ## Getting Started
+
+(Requires Node.js, PostgreSQL, and basic familiarity with PERN stack. DB schema included in Server/schema.db)
 
 1. Clone the repository:
    ```bash
@@ -43,8 +45,8 @@ Showcase of a registered user logging in, changing settings, launching some note
 
 3. Install dependencies:
    ```bash
-   cd client && npm install
-   cd ../server && npm install
+   cd Client && npm install
+   cd ../Server && npm install
    ```
 
 4. To start the webapp run `npm run dev` inside both `Client` and `Server`
