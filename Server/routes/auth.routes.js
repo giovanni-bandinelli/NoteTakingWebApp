@@ -6,26 +6,17 @@ import rateLimit from 'express-rate-limit';
 const router = express.Router();
 
 const authLimiter = rateLimit({
-  windowMs: 10 * 1000,
-  max: 2,
-  keyGenerator: (req) => {
-    const ip = req.headers['fly-client-ip'] || req.ip;
-    console.log('\n=== ALL client IP INFO ===');
-    console.log('req.ip:', req.ip);
-    console.log('fly-client-ip:', req.headers['fly-client-ip']);
-    console.log('x-forwarded-for:', req.headers['x-forwarded-for']);
-    console.log('x-real-ip:', req.headers['x-real-ip']);
-    console.log('cf-connecting-ip:', req.headers['cf-connecting-ip']);
-    console.log('==================\n')
-    return ip;
-  },
+  windowMs: 3 * 60 * 1000,
+  max: 10, 
+  keyGenerator: req => req.headers['fly-client-ip'],//same as doing req.headers['x-forwarded-for']?.split(',')[0] if hosting somewhere else
   handler: (req, res) => {
-    const retryAfter = Math.ceil((req.rateLimit.resetTime - new Date()) / 1000);
+    const retryAfter = Math.ceil((req.rateLimit.resetTime - Date.now()) / 1000);
     res.status(429).json({ message: `Too many requests, try again in ${retryAfter} seconds.` });
   },
   standardHeaders: true,
   legacyHeaders: false,
 });
+
 
 
 router.post('/register', authLimiter, registerUser);
