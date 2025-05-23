@@ -109,7 +109,6 @@ async function onSubmit(event) {
   }
     // Parse known errors
     const message = err.message || '';
-    if(res.status === 429)
     if (message.includes('Invalid credentials') || message.toLowerCase().includes('unauthorized')) {
       setFormError("Invalid credentials.");
     } else if (message.includes('already registered')) {
