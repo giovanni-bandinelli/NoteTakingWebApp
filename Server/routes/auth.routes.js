@@ -8,14 +8,17 @@ const router = express.Router();
 const authLimiter = rateLimit({
   windowMs: 10 * 1000,
   max: 2,
+  keyGenerator: (req) => {
+    return req.headers['fly-client-ip'] || req.ip;
+  },
   handler: (req, res) => {
     const retryAfter = Math.ceil((req.rateLimit.resetTime - new Date()) / 1000);
     res.status(429).json({ message: `Too many requests, try again in ${retryAfter} seconds.` });
   },
   standardHeaders: true,
-  legacyHeaders: false
-  } 
-);
+  legacyHeaders: false,
+});
+
 
 router.post('/register', authLimiter, registerUser);
 router.post('/login', authLimiter, loginUser);
