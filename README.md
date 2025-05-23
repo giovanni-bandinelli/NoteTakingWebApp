@@ -1,29 +1,29 @@
-## Note-Taking Web App
+# Note-Taking Web App
 
-This is my attempt to convert [this Frontend Mentor's challenge](https://www.frontendmentor.io/challenges/note-taking-web-app-773r7bUfOG) into a fully functional full-stack application.
+A full-stack note-taking application built with the PERN stack (PostgreSQL, Express, React, Node.js), inspired by a [Frontend Mentor challenge](https://www.frontendmentor.io/challenges/note-taking-web-app-773r7bUfOG).
 
-I'm building it with as few libraries as possible using the **PERN stack** (PostgreSQL, Express, React, Node.js). So far, I've completed:
+## Features
 
-- [x] Auth features: Register, Login, Google OAuth, Email reset links  
-- [x] User settings: Theme and font customization  
-- [x] Desktop layout
-- [x] Notes CRUD operations (create, retrieve with various filters, modify/archivie and delete them)
-- [x] Toasts, modals, and a proper error display system (e.g. "user already registered")
+- User Authentication: Register, Login, Google OAuth, Password reset via email
+- Notes CRUD: Create, filter, archive, edit, and delete notes
+- User Preferences: Theme and font customization
+- Notifications: Toasts, modals, and error handling
+- Rate Limiting: Basic API protection via `express-rate-limit`
 
-I'm planning to host the client on **Vercel** and the server (plus PostgreSQL DB) on **Railway**.
+## Tech Stack
 
-### Stuff that I'll leave out in order to complete and deploy at least a MVP :(
-- [ ] Responsive layout for mobile/tablet <-- Since it's a majorly different layout compared to Desktop I had set up a react-responsive hook to render either one or the other, but aside from that it wouldn't be that big of a challenge.
+- **Frontend**: React, Vite, CSS Modules
+- **Backend**: Node.js, Express, PostgreSQL, Railway
+- **Deployment**: Vercel (frontend), Fly.io (backend + DB)
+- **Auth**: Google OAuth 2.0, JWT
+- **Other**: Docker (local dev), GitHub for version control
 
-- [ ] Markdown + image support (maybe, still deciding) <-- I would have used some library for the Markdown 100%, Idk how it would have visually clashed with the rest of the app tho tbh.
-- [ ] Full keyboard accessibility <-- This is something I'm actually really interested in, will try to implement it in some smaller project :)
+## Limitations
 
+This MVP does not include a responsive mobile/tablet layout. The app is best experienced on a desktop device (≥1000px width).
 
----
+## Screenshots
 
-### Some Screenshots (since app isn't really an usable mvp yet without setting up some stuff)
-Login Page
-  
   ![Login Page](./images/loginPage.png)
   <br><br>Light mode
   
@@ -32,6 +32,15 @@ Login Page
   <br><br>Dark mode + mono font 
   
   ![Dark Theme](./images/darkTheme.png)
+
+## License
+
+[Apache-2.0](./LICENSE)
+
+## Links
+
+- Live: [note-taking-web-app-eight-green.vercel.app](https://note-taking-web-app-eight-green.vercel.app)
+- GitHub Repo: [github.com/giovanni-bandinelli/NoteTakingWebApp](https://github.com/giovanni-bandinelli/NoteTakingWebApp)
 
 
 ## License
