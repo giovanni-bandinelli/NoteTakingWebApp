@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useGoogleLogin } from '@react-oauth/google';
 
 import { AuthContext } from '../../context/AuthContext';
-import { ToastProvider } from '../../context/ToastContext.jsx';
+import { useToast } from '../../context/ToastContext.jsx';
 import { loginAPI, registerAPI, googleLoginAPI} from '../../api/auth.api.js'
 
 import { AppLogo, GoogleIcon, InfoIcon } from '../../components/icons';
@@ -74,6 +74,7 @@ function FormSection({ isLogin, setIsAuthenticated }) {
   const [password, setPassword] = useState('');
   const [formError, setFormError] = useState('');
   const navigate = useNavigate();
+  const { showToast } = useToast();
 
 async function onSubmit(event) {
   event.preventDefault();
@@ -105,8 +106,7 @@ async function onSubmit(event) {
     navigate('/');
   } catch (err) {
     console.error(err);
-    if (err.message.includes('Too many')) {showToast({ type: 'error', message: err.message });
-  }
+    if (err.message.includes('Too many')) {showToast({ type: 'error', message: err.message })}
     // Parse known errors
     const message = err.message || '';
     if (message.includes('Invalid credentials') || message.toLowerCase().includes('unauthorized')) {
