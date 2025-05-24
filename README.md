@@ -1,49 +1,60 @@
 # Note-Taking Web App
 
-A full-stack note-taking application built with the PERN stack (PostgreSQL, Express, React, Node.js), inspired by a [Frontend Mentor challenge](https://www.frontendmentor.io/challenges/note-taking-web-app-773r7bUfOG).
+A full-stack note-taking application built with the **PERN stack** (PostgreSQL, Express, React, Node.js), Figma files taken from this [Frontend Mentor challenge](https://www.frontendmentor.io/challenges/note-taking-web-app-773r7bUfOG).
+
+## Demo
+
+Showcase of a registered user logging in, changing settings, launching some notes CRUD queries and refreshing the page with JWT stored in localStorage.
+
+![User Flow](./demo.gif)
 
 ## Features
 
-- User Authentication: Register, Login, Google OAuth, Password reset via email
-- Notes CRUD: Create, filter, archive, edit, and delete notes
-- User Preferences: Theme and font customization
-- Notifications: Toasts, modals, and error handling
-- Rate Limiting: Basic API protection via `express-rate-limit`
+- User Authentication (Register, Login, Google OAuth, Email reset)
+- Notes CRUD (create, filter, edit, archive, delete)
+- User Preferences (theme and font customization)
+- Notifications system (toasts, modals, inline error messages)
+- Rate limiting for API endpoints
 
 ## Tech Stack
 
-- **Frontend**: React, Vite, CSS Modules
-- **Backend**: Node.js, Express, PostgreSQL, Railway
-- **Deployment**: Vercel (frontend), Fly.io (backend + DB)
+- **Frontend**: React, Vite
+- **Backend**: Node.js, Express
+- **Database**: PostgreSQL (hosted on Fly.io)
+- **Deployment**: Vercel (client), Fly.io (server + db)
 - **Auth**: Google OAuth 2.0, JWT
-- **Other**: Docker (local dev), GitHub for version control
+- **Other**: CSS styling with CSS Modules only, using design token taken from the Figma Files
 
-## Limitations
+## Limitations and cut out content due to time constraints/low or ROI
 
-This MVP does not include a responsive mobile/tablet layout. The app is best experienced on a desktop device (≥1000px width).
+- No mobile/tablet layout: MVP optimized for desktop only (≥1000px width).
+- No keyboard accessibility
+- No markdown/image support in notes
 
-## Screenshots
+## Getting Started
 
-  ![Login Page](./images/loginPage.png)
-  <br><br>Light mode
-  
-  ![Light Theme](./images/lightTheme.png)
-  
-  <br><br>Dark mode + mono font 
-  
-  ![Dark Theme](./images/darkTheme.png)
+(Requires Node.js, PostgreSQL, and basic familiarity with PERN stack. DB schema included in Server/schema.db)
 
-## License
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/giovanni-bandinelli/NoteTakingWebApp.git
+   cd NoteTakingWebApp
+   ```
 
-[Apache-2.0](./LICENSE)
+2. Create `.env` files using the provided examples inside `./Client` and `./Server`
+
+3. Install dependencies:
+   ```bash
+   cd Client && npm install
+   cd ../Server && npm install
+   ```
+
+4. To start the webapp run `npm run dev` inside both `Client` and `Server`
+
 
 ## Links
 
-- Live: [note-taking-web-app-eight-green.vercel.app](https://note-taking-web-app-eight-green.vercel.app)
-- GitHub Repo: [github.com/giovanni-bandinelli/NoteTakingWebApp](https://github.com/giovanni-bandinelli/NoteTakingWebApp)
+[Live Demo](https://note-taking-web-app-eight-green.vercel.app/).
 
-
-## License
-
-[Apache-2.0](./LICENSE)
+> Note: The live demo may take a few seconds to load initially due to cold starts on Fly.io.
 
