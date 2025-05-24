@@ -6,7 +6,7 @@ export default function NoteActions({ currentView, onRequestDelete, onRequestArc
     <aside className={styles.noteActions}>
       {currentView.type === 'archived' ? (
         <button className={styles.actionButton} onClick={onRequestArchive}>
-          <span className={styles.icon}><RestoreIcon /></span> <span>Restore Note</span>
+          <RestoreIcon /><span>Restore Note</span>
         </button>
       ) : (
         <button className={styles.actionButton} onClick={onRequestArchive}>
