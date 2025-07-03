@@ -28,8 +28,8 @@ Showcase of a registered user logging in, changing settings, launching some note
 ## Limitations and cut out content due to time constraints/low or ROI
 
 - No mobile/tablet layout: MVP optimized for desktop only (≥1000px width).
-- No keyboard accessibility
-- No markdown/image support in notes
+- Keyboard accessibility not kept in mind
+- No markdown/image upload support in notes
 
 ## Getting Started
 
